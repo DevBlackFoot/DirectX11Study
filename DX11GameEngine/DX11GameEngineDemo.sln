@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FootGraphicsEngine", "FootGraphicsEngine\FootGraphicsEngine.vcxproj", "{35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FootGameEngine", "FootGameEngine\FootGameEngine.vcxproj", "{5734E107-DB70-4114-8DFD-82DA21BF4E8C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B} = {35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DX11GameEngineDemo", "DX11GameEngineDemo\DX11GameEngineDemo.vcxproj", "{4D72BA31-A29E-400C-819A-33CF9F0AC4E4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5734E107-DB70-4114-8DFD-82DA21BF4E8C} = {5734E107-DB70-4114-8DFD-82DA21BF4E8C}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shader", "Shader", "{17055483-4098-4453-BDE5-ABEFD56B7382}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LegacyModel", "LegacyModel", "{C2202B98-58F9-40EA-864D-92CDA127E461}"
+	ProjectSection(SolutionItems) = preProject
+		Output\Shader\LegacyModel\LegacyModelPS.hlsl = Output\Shader\LegacyModel\LegacyModelPS.hlsl
+		Output\Shader\LegacyModel\LegacyModelTypes.hlsli = Output\Shader\LegacyModel\LegacyModelTypes.hlsli
+		Output\Shader\LegacyModel\LegacyModelVS.hlsl = Output\Shader\LegacyModel\LegacyModelVS.hlsl
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PosColor", "PosColor", "{AA328FBC-7E59-4298-A052-20E1CEEFCB87}"
+	ProjectSection(SolutionItems) = preProject
+		Output\Shader\PosColor\PosColorPS.hlsl = Output\Shader\PosColor\PosColorPS.hlsl
+		Output\Shader\PosColor\PosColorTypes.hlsli = Output\Shader\PosColor\PosColorTypes.hlsli
+		Output\Shader\PosColor\PosColorVS.hlsl = Output\Shader\PosColor\PosColorVS.hlsl
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TextureRect", "TextureRect", "{964417C1-55B1-4941-AF6A-C9A18141AC36}"
+	ProjectSection(SolutionItems) = preProject
+		Output\Shader\TextureRect\TextureRectPS.hlsl = Output\Shader\TextureRect\TextureRectPS.hlsl
+		Output\Shader\TextureRect\TextureRectTypes.hlsli = Output\Shader\TextureRect\TextureRectTypes.hlsli
+		Output\Shader\TextureRect\TextureRectVS.hlsl = Output\Shader\TextureRect\TextureRectVS.hlsl
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B}.Debug|x64.ActiveCfg = Debug|x64
+		{35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B}.Debug|x64.Build.0 = Debug|x64
+		{35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B}.Debug|x86.ActiveCfg = Debug|Win32
+		{35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B}.Debug|x86.Build.0 = Debug|Win32
+		{35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B}.Release|x64.ActiveCfg = Release|x64
+		{35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B}.Release|x64.Build.0 = Release|x64
+		{35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B}.Release|x86.ActiveCfg = Release|Win32
+		{35FAD7CB-D8B3-4BFD-A74C-260C2EC4828B}.Release|x86.Build.0 = Release|Win32
+		{5734E107-DB70-4114-8DFD-82DA21BF4E8C}.Debug|x64.ActiveCfg = Debug|x64
+		{5734E107-DB70-4114-8DFD-82DA21BF4E8C}.Debug|x64.Build.0 = Debug|x64
+		{5734E107-DB70-4114-8DFD-82DA21BF4E8C}.Debug|x86.ActiveCfg = Debug|Win32
+		{5734E107-DB70-4114-8DFD-82DA21BF4E8C}.Debug|x86.Build.0 = Debug|Win32
+		{5734E107-DB70-4114-8DFD-82DA21BF4E8C}.Release|x64.ActiveCfg = Release|x64
+		{5734E107-DB70-4114-8DFD-82DA21BF4E8C}.Release|x64.Build.0 = Release|x64
+		{5734E107-DB70-4114-8DFD-82DA21BF4E8C}.Release|x86.ActiveCfg = Release|Win32
+		{5734E107-DB70-4114-8DFD-82DA21BF4E8C}.Release|x86.Build.0 = Release|Win32
+		{4D72BA31-A29E-400C-819A-33CF9F0AC4E4}.Debug|x64.ActiveCfg = Debug|x64
+		{4D72BA31-A29E-400C-819A-33CF9F0AC4E4}.Debug|x64.Build.0 = Debug|x64
+		{4D72BA31-A29E-400C-819A-33CF9F0AC4E4}.Debug|x86.ActiveCfg = Debug|Win32
+		{4D72BA31-A29E-400C-819A-33CF9F0AC4E4}.Debug|x86.Build.0 = Debug|Win32
+		{4D72BA31-A29E-400C-819A-33CF9F0AC4E4}.Release|x64.ActiveCfg = Release|x64
+		{4D72BA31-A29E-400C-819A-33CF9F0AC4E4}.Release|x64.Build.0 = Release|x64
+		{4D72BA31-A29E-400C-819A-33CF9F0AC4E4}.Release|x86.ActiveCfg = Release|Win32
+		{4D72BA31-A29E-400C-819A-33CF9F0AC4E4}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C2202B98-58F9-40EA-864D-92CDA127E461} = {17055483-4098-4453-BDE5-ABEFD56B7382}
+		{AA328FBC-7E59-4298-A052-20E1CEEFCB87} = {17055483-4098-4453-BDE5-ABEFD56B7382}
+		{964417C1-55B1-4941-AF6A-C9A18141AC36} = {17055483-4098-4453-BDE5-ABEFD56B7382}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {994FC6B7-665F-4120-91F6-33D91CFD6388}
+	EndGlobalSection
+EndGlobal

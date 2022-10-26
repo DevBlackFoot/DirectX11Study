@@ -1,0 +1,60 @@
+#pragma once
+#include "Utils/d3d11Utils.h"
+
+namespace GraphicsEngineSpace
+{
+	/**
+	* \brief 오브젝트가 가지고 있는 각종 리소스들
+	*
+	* // 해당 내용은 빌더의 종류에 따라, 오브젝트의 종류에 따라. 빌더에서 세팅해서 오브젝트에 넣어준다.
+	*
+	* 2022.07.11(월) Dev.BlackFoot
+	*/
+	struct ObjectResources
+	{
+		// 버텍스와 인덱스의 오프셋과 카운트
+		int VertexOffset;
+		UINT IndexOffset;
+		UINT IndexCount;
+
+		// 버텍스 버퍼, 인덱스 버퍼
+		ID3D11Buffer* VB;
+		ID3D11Buffer* IB;
+
+		// 레스터라이즈 스테이트
+		ID3D11RasterizerState* RasterizerState;
+
+		// 토폴로지
+		D3D11_PRIMITIVE_TOPOLOGY Topology;
+
+		// 텍스쳐를 사용한다면.. 파일 패스
+		std::wstring DiffuseMapPathName;
+		std::wstring NormalMapPathName;
+
+		// 오브젝트 이름
+		std::string ObjName;
+
+		// 렌더 타겟에서 사용해줄 Shader Resource View
+		ID3D11ShaderResourceView* RenderTargetTexture;
+
+		ObjectResources()
+			: VertexOffset(0)
+			, IndexOffset(0)
+			, IndexCount(0)
+			, VB(nullptr)
+			, IB(nullptr)
+			, RasterizerState(nullptr)
+			, Topology()
+			, DiffuseMapPathName(L"NONE")
+			, NormalMapPathName(L"NONE")
+			, ObjName("NULL")
+			, RenderTargetTexture(nullptr)
+		{}
+
+		~ObjectResources()
+		{
+			ReleaseCOM(VB)
+			ReleaseCOM(IB)
+		}
+	};
+}

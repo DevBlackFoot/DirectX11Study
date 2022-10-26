@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="inc\GamePch.h" />
+    <ClInclude Include="inc\PCH\FootEngineTypedef.h" />
+    <ClInclude Include="inc\Object\Object.h" />
+    <ClInclude Include="inc\Object\ITriggerable.h" />
+    <ClInclude Include="inc\Object\GameObject.h" />
+    <ClInclude Include="inc\Component\Transform.h" />
+    <ClInclude Include="inc\Object\ComponentBase.h" />
+    <ClInclude Include="inc\Object\MonoBehavior.h" />
+    <ClInclude Include="inc\Manager\WindowManager\WindowManager.h" />
+    <ClInclude Include="inc\Manager\UIManager\UIManager.h" />
+    <ClInclude Include="inc\Manager\Timer\Timer.h" />
+    <ClInclude Include="inc\Manager\SceneManager\SceneManager.h" />
+    <ClInclude Include="inc\Manager\PhysicsManager\PhysicsManager.h" />
+    <ClInclude Include="inc\Manager\SceneManager\SceneBase\SceneBase.h" />
+    <ClInclude Include="inc\Manager\InputManager\InputManager.h" />
+    <ClInclude Include="inc\Manager\GraphicsManager\GraphicsManager.h" />
+    <ClInclude Include="inc\Component\BasicCameraController.h" />
+    <ClInclude Include="inc\Component\BoxCollider.h" />
+    <ClInclude Include="inc\Component\Camera.h" />
+    <ClInclude Include="inc\Component\ColliderBase.h" />
+    <ClInclude Include="inc\Component\RayCollider.h" />
+    <ClInclude Include="inc\Component\RendererBase.h" />
+    <ClInclude Include="inc\Component\SphereCollider.h" />
+    <ClInclude Include="inc\Utils\BoundingVolumes.h" />
+    <ClInclude Include="inc\EngineMain\GameEngine.h" />
+    <ClInclude Include="inc\PCH\CommentLib.h" />
+    <ClInclude Include="inc\Component\PosColorRenderer.h" />
+    <ClInclude Include="inc\Component\LegacyRenderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\GamePch.cpp" />
+    <ClCompile Include="src\Object\Object.cpp" />
+    <ClCompile Include="src\Object\GameObject.cpp" />
+    <ClCompile Include="src\Component\Transform.cpp" />
+    <ClCompile Include="src\Object\ComponentBase.cpp" />
+    <ClCompile Include="src\Manager\WindowManager\WindowManager.cpp" />
+    <ClCompile Include="src\Manager\UIManager\UIManager.cpp" />
+    <ClCompile Include="src\Manager\Timer\Timer.cpp" />
+    <ClCompile Include="src\Manager\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="src\Manager\SceneManager\SceneBase\SceneBase.cpp" />
+    <ClCompile Include="src\Manager\PhysicsManager\PhysicsManager.cpp" />
+    <ClCompile Include="src\Manager\InputManager\InputManager.cpp" />
+    <ClCompile Include="src\Manager\GraphicsManager\GraphicsManager.cpp" />
+    <ClCompile Include="src\Component\BasicCameraController.cpp" />
+    <ClCompile Include="src\Component\BoxCollider.cpp" />
+    <ClCompile Include="src\Component\Camera.cpp" />
+    <ClCompile Include="src\Component\ColliderBase.cpp" />
+    <ClCompile Include="src\Component\RayCollider.cpp" />
+    <ClCompile Include="src\Component\RendererBase.cpp" />
+    <ClCompile Include="src\Component\SphereCollider.cpp" />
+    <ClCompile Include="src\EngineMain\GameEngine.cpp" />
+    <ClCompile Include="src\Component\PosColorRenderer.cpp" />
+    <ClCompile Include="src\Component\LegacyRenderer.cpp" />
+  </ItemGroup>
+</Project>
