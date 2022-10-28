@@ -49,12 +49,25 @@ namespace GraphicsEngineSpace
 		return true;
 	}
 
-	std::shared_ptr<ShaderBase> ShaderManager::GetShader(std::string shaderName)
+	std::shared_ptr<ShaderBase> ShaderManager::GetShader(const std::string& shaderName)
 	{
 		if (shaderMap.find(shaderName) == shaderMap.end())
 			return nullptr;
 
 		return shaderMap.at(shaderName);
+	}
+
+	void ShaderManager::Finalize()
+	{
+		// 맵을 순회 하면서 모든 코드 삭제
+		for(auto shader : shaderMap)
+		{
+			shader.second.reset();
+		}
+
+		shaderMap.clear();
+
+		SafeReset(instance)
 	}
 
 	/**

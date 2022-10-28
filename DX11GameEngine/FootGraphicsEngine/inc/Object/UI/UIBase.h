@@ -34,11 +34,11 @@ namespace GraphicsEngineSpace
 		UIBase()
 			: width(0.0f)
 			, height(0.0f)
+			, isEnable(true)
 			, parent(std::weak_ptr<UIBase>())
 			, position(SimpleMath::Vector3::Zero)
 			, rotation(SimpleMath::Vector3::Zero)
 			, scale(SimpleMath::Vector2{ 1.0f, 1.0f })
-			, isEnable(true)
 			, screenPosition(SimpleMath::Vector2::Zero)
 		{}
 

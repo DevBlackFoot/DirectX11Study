@@ -15,8 +15,10 @@
 #include "Manager/ShaderManager.h"
 #include "Manager/BufferManager.h"
 #include "Manager/SamplerManager.h"
+#include "Manager/FontManager.h"
 
 #include "Object/RenderTargetObj.h"
+#include "Object/UI/TextUI.h"
 
 namespace GraphicsEngineSpace
 {
@@ -27,6 +29,9 @@ namespace GraphicsEngineSpace
 		, graphicsCore(nullptr)
 		, mainRenderTarget(nullptr)
 		, depthRenderTarget(nullptr)
+		, normalRenderTarget(nullptr)
+		, albedoRenderTarget(nullptr)
+		, worldPosRenderTarget(nullptr)
 		, spriteBatch(nullptr)
 		, deltaTime(0.0f)
 		, minimized(false)
@@ -39,10 +44,6 @@ namespace GraphicsEngineSpace
 
 	Renderer::~Renderer()
 	{
-		if (graphicsCore)
-		{
-			delete graphicsCore;
-		}
 	}
 
 	bool Renderer::Initialize(HWND _hWnd, int _clientWidth, int _clientHeight)
@@ -52,12 +53,15 @@ namespace GraphicsEngineSpace
 		clientWidth = _clientWidth;
 		clientHeight = _clientHeight;
 
-		graphicsCore = new DX11GraphicsCore;
+		graphicsCore = DX11GraphicsCore::GetInstance();
 		// 각종 디바이스 등 초기화.
 		graphicsCore->Initialize(hWnd, clientWidth, clientHeight);
 
 		mainRenderTarget = new MainRenderTarget;
 		depthRenderTarget = new RenderTargetTexture;
+		normalRenderTarget = new RenderTargetTexture;
+		albedoRenderTarget = new RenderTargetTexture;
+		worldPosRenderTarget = new RenderTargetTexture;
 
 		ID3D11Device* device = graphicsCore->GetDevice();
 		ID3D11DeviceContext* deviceContext = graphicsCore->GetImmediateDC();
@@ -77,15 +81,12 @@ namespace GraphicsEngineSpace
 		// 빌더 매니저 생성 및 Init => 디바이스를 받기 때문에 렌더러에서 Init을 해주어야한다.
 		BuilderManger::GetInstance()->InitBuilderAll(graphicsCore->GetDevice(), graphicsCore->GetImmediateDC());
 
-		// Texture 하나 만들어보기.
-		depthRenderTargetObj = Factory::GetInstance()->CreateDXObject<RenderTargetObj>(
-		BuilderManger::GetInstance()->GetBuilder("TextureRectBuilder"), "DepthTex",
-		depthRenderTarget->GetShaderResourceView());
-
-		depthRenderTargetObj->Init(device, deviceContext);
-
 		// 스프라이트 생성
 		spriteBatch = new DirectX::SpriteBatch(deviceContext);
+		FontManager::GetInstance()->Init(device, spriteBatch, mainRenderTarget->GetDepthStencilState());
+
+		// Text Test
+
 
 		// 여기까지 하면 성공
 		return true;
@@ -100,10 +101,26 @@ namespace GraphicsEngineSpace
 		InputLayout::DestoryAll();
 		RasterizerState::DestroyAll();
 
+		// 각종 매니저 Finalize
+		ShaderManager::GetInstance()->Finalize();
+		BufferManager::GetInstance()->Finalize();
+		SamplerManager::GetInstance()->Release();
+		FontManager::GetInstance()->Finalize();
+
 		// 각종 COM 포인터를 Release 한다.
 		mainRenderTarget->Finalize();
 
 		graphicsCore->Finalize();
+
+		depthRenderTarget->Finalize();
+
+		// 그리고포인터 변수를 지워준다.
+		SafeDelete(mainRenderTarget);
+		SafeDelete(depthRenderTarget);
+		SafeDelete(normalRenderTarget);
+		SafeDelete(albedoRenderTarget);
+		SafeDelete(worldPosRenderTarget);
+
 	}
 
 	void Renderer::OnResize()
@@ -120,6 +137,15 @@ namespace GraphicsEngineSpace
 
 		depthRenderTarget->Finalize();
 		depthRenderTarget->Init(device, clientWidth, clientHeight, graphicsCore->GetMSAAQuality());
+
+		normalRenderTarget->Finalize();
+		normalRenderTarget->Init(device, clientWidth, clientHeight, graphicsCore->GetMSAAQuality());
+
+		albedoRenderTarget->Finalize();
+		albedoRenderTarget->Init(device, clientWidth, clientHeight, graphicsCore->GetMSAAQuality());
+
+		worldPosRenderTarget->Finalize();
+		worldPosRenderTarget->Init(device, clientWidth, clientHeight, graphicsCore->GetMSAAQuality());
 
 		// 뷰포트 설정.
 		D3D11_VIEWPORT _vp;
@@ -187,20 +213,49 @@ namespace GraphicsEngineSpace
 	void Renderer::BeginRender()
 	{
 		// 이 지점에서 업데이트 해보자..
-		depthRenderTargetObj->Update(XMMatrixIdentity(), XMMatrixIdentity(), XMMatrixIdentity());
+		//depthRenderTargetObj->Update(XMMatrixIdentity(), XMMatrixIdentity(), XMMatrixIdentity());
 
 		graphicsCore->ResetView(
 			mainRenderTarget->GetRenderTargetView(),
-			mainRenderTarget->GetDepthStencilView());
+			mainRenderTarget->GetDepthStencilView(),
+			Colors::Gray
+		);
 
 		graphicsCore->ResetView(
 			depthRenderTarget->GetRenderTargetView(),
-			mainRenderTarget->GetDepthStencilView()
+			mainRenderTarget->GetDepthStencilView(),
+			Colors::Black
+		);
+
+		graphicsCore->ResetView(
+			normalRenderTarget->GetRenderTargetView(),
+			mainRenderTarget->GetDepthStencilView(),
+			Colors::Black
+		);
+
+		graphicsCore->ResetView(
+			albedoRenderTarget->GetRenderTargetView(),
+			mainRenderTarget->GetDepthStencilView(),
+			Colors::Black
+		);
+
+		graphicsCore->ResetView(
+			worldPosRenderTarget->GetRenderTargetView(),
+			mainRenderTarget->GetDepthStencilView(),
+			Colors::Black
 		);
 
 		// Pixel Shader에서 결과로 내보내주는 SV_target이 총 다섯개기 때문에 해당 부분에 총 다섯개의 렌더 타겟이 들어갈 수 있다.
-		ID3D11RenderTargetView* renderTargets[] = { mainRenderTarget->GetRenderTargetView(), depthRenderTarget->GetRenderTargetView() };
-		graphicsCore->GetImmediateDC()->OMSetRenderTargets(2, renderTargets, mainRenderTarget->GetDepthStencilView());
+		ID3D11RenderTargetView* renderTargets[] =
+		{
+			mainRenderTarget->GetRenderTargetView(),
+			depthRenderTarget->GetRenderTargetView(),
+			normalRenderTarget->GetRenderTargetView(),
+			albedoRenderTarget->GetRenderTargetView(),
+			worldPosRenderTarget->GetRenderTargetView()
+		};
+		graphicsCore->GetImmediateDC()->OMSetRenderTargets(ARRAYSIZE(renderTargets), renderTargets, mainRenderTarget->GetDepthStencilView());
+
 	}
 
 	void Renderer::Render()
@@ -211,7 +266,7 @@ namespace GraphicsEngineSpace
 		{
 			obj->Render();
 		}
-		
+
 
 		graphicsCore->ResetRS();
 	}
@@ -230,7 +285,25 @@ namespace GraphicsEngineSpace
 		auto depthSRV = depthRenderTarget->GetShaderResourceView();
 
 		spriteBatch->Begin(DirectX::SpriteSortMode_Deferred, nullptr, nullptr, mainRenderTarget->GetDepthStencilState());
-		spriteBatch->Draw(depthSRV, RECT{0, 0, static_cast<long>(clientWidth * 0.2f), static_cast<long>(clientHeight * 0.2f)});
+		spriteBatch->Draw(depthSRV, RECT{ 0, 0, static_cast<long>(clientWidth * 0.2f), static_cast<long>(clientHeight * 0.2f) });
+		spriteBatch->End();
+
+		auto normalSRV = normalRenderTarget->GetShaderResourceView();
+
+		spriteBatch->Begin(DirectX::SpriteSortMode_Deferred, nullptr, nullptr, mainRenderTarget->GetDepthStencilState());
+		spriteBatch->Draw(normalSRV, RECT{ 0, static_cast<long>(clientHeight * 0.2f), static_cast<long>(clientWidth * 0.2f), static_cast<long>(clientHeight * 0.4f) });
+		spriteBatch->End();
+
+		auto albedoSRV = albedoRenderTarget->GetShaderResourceView();
+
+		spriteBatch->Begin(DirectX::SpriteSortMode_Deferred, nullptr, nullptr, mainRenderTarget->GetDepthStencilState());
+		spriteBatch->Draw(albedoSRV, RECT{ 0, static_cast<long>(clientHeight * 0.4f), static_cast<long>(clientWidth * 0.2f), static_cast<long>(clientHeight * 0.6f) });
+		spriteBatch->End();
+
+		auto worldPosSRV = worldPosRenderTarget->GetShaderResourceView();
+
+		spriteBatch->Begin(DirectX::SpriteSortMode_Deferred, nullptr, nullptr, mainRenderTarget->GetDepthStencilState());
+		spriteBatch->Draw(worldPosSRV, RECT{ 0, static_cast<long>(clientHeight * 0.6f), static_cast<long>(clientWidth * 0.2f), static_cast<long>(clientHeight * 0.8f) });
 		spriteBatch->End();
 
 		graphicsCore->GetImmediateDC()->PSSetShaderResources(0, 1, null);

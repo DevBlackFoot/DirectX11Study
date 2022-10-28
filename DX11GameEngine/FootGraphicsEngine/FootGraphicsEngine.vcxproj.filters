@@ -41,6 +41,7 @@
     <ClInclude Include="inc\GraphicsCore\RenderTargetTexture.h" />
     <ClInclude Include="inc\Object\RenderTargetObj.h" />
     <ClInclude Include="inc\Builder\TextureRectBuilder.h" />
+    <ClInclude Include="inc\Manager\FontManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GraphicsPch.cpp" />
@@ -70,6 +71,9 @@
     <ClCompile Include="src\GraphicsCore\RenderTargetTexture.cpp" />
     <ClCompile Include="src\Object\RenderTargetObj.cpp" />
     <ClCompile Include="src\Builder\TextureRectBuilder.cpp" />
+    <ClCompile Include="src\Object\UI\Canvas.cpp" />
+    <ClCompile Include="src\Object\UI\TextUI.cpp" />
+    <ClCompile Include="src\Manager\FontManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -58,7 +58,10 @@ namespace GraphicsEngineSpace
 
 	void SamplerManager::Release()
 	{
+		ReleaseCOM(wrapSamplerState);
+		ReleaseCOM(clampSamplerState);
 
+		SafeReset(instance);
 	}
 
 	std::shared_ptr<SamplerManager> SamplerManager::GetInstance()

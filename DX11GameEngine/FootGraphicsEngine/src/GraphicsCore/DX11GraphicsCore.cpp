@@ -5,6 +5,8 @@
 
 namespace GraphicsEngineSpace
 {
+	std::shared_ptr<DX11GraphicsCore> DX11GraphicsCore::instance = nullptr;
+
 	DX11GraphicsCore::DX11GraphicsCore()
 		: m_D3DDevice(nullptr)
 		, m_D3DImmediateContext(nullptr)
@@ -19,6 +21,14 @@ namespace GraphicsEngineSpace
 	{
 		if (m_D3DImmediateContext)
 			m_D3DImmediateContext->ClearState();
+	}
+
+	std::shared_ptr<DX11GraphicsCore> DX11GraphicsCore::GetInstance()
+	{
+		if (instance == nullptr)
+			instance = std::make_shared<DX11GraphicsCore>();
+
+		return instance;
 	}
 
 	bool DX11GraphicsCore::Initialize(HWND _hWnd, int _clientWidth, int _clientHeight)
@@ -128,6 +138,8 @@ namespace GraphicsEngineSpace
 
 		ReleaseCOM(m_D3DImmediateContext);
 		ReleaseCOM(m_D3DDevice);
+
+		SafeReset(instance);
 	}
 
 	/**
@@ -135,13 +147,13 @@ namespace GraphicsEngineSpace
 	* \param _nowRT ÇöÀç ·»´õ Å¸°Ù ºä
 	* \param _nowDSV ÇöÀç µª½º ½ºÅÙ½Ç ºä
 	*/
-	void DX11GraphicsCore::ResetView(ID3D11RenderTargetView* _nowRT, ID3D11DepthStencilView* _nowDSV)
+	void DX11GraphicsCore::ResetView(ID3D11RenderTargetView* _nowRT, ID3D11DepthStencilView* _nowDSV, const FLOAT color[4])
 	{
 		assert(m_D3DImmediateContext);
 		assert(m_SwapChain);
 
 		// ·»´õÅ¸°Ù°ú ½ºÅÙ½Ç ¹öÆÛ¸¦ ÃÊ±âÈ­ÇÑ´Ù.
-		m_D3DImmediateContext->ClearRenderTargetView(_nowRT, reinterpret_cast<const float*>(&Colors::Gray));
+		m_D3DImmediateContext->ClearRenderTargetView(_nowRT, color);
 		m_D3DImmediateContext->ClearDepthStencilView(_nowDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	}
 

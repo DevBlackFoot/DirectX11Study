@@ -38,5 +38,9 @@ namespace ClientSpace
 
 		std::shared_ptr<GameObject> normalBox = CreateEmpty();
 		normalBox->AddComponent<LegacyRenderer>()->Init("Resources/Model/box.ASE", L"Resources/Texture/bricks.dds", L"Resources/Texture/bricks_nmap.dds");
+
+		std::shared_ptr<GameObject> genji = CreateEmpty();
+		genji->AddComponent<LegacyRenderer>()->Init("Resources/Model/genji_max.ASE", L"Resources/Texture/000000002405.dds", L"Resources/Texture/000000002406_b.dds");
+		genji->GetComponent<Transform>()->SetPosition(Vector3{5.f, 0.f, 0.f});
 	}
 }

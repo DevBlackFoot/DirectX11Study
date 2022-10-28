@@ -37,6 +37,8 @@ namespace GraphicsEngineSpace
 		// 사용할 버퍼 만들기
 		bool CreateConstantBuffer(std::string cbName, UINT typeSize);
 
+		void Finalize();
+
 		// 필요한 버퍼 불러오기
 		std::shared_ptr<BufferBase> GetBuffer(std::string bufferName);
 	};

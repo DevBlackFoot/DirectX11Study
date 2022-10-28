@@ -47,12 +47,14 @@ using namespace DirectX;
 #include <fstream>
 #include <vector>
 #include <memory>
+#include <tchar.h>
+
 
 // COM 포인터 Release를 위한 매크로
-#define ReleaseCOM(x) { if(x){ x->Release();x = 0; } }
+#define ReleaseCOM(x) { if(x){ x->Release(); x = 0; } }
 
 // Delete 매크로.
-#define SafeDelete(x) { delete x; x = 0; }
+#define SafeDelete(x) { if(x){ delete x; x = 0; } }
 #define SafeReset(x) { if(x){ x.reset(); x = 0; } }
 
 // HRESULT용 매크로.
@@ -121,3 +123,11 @@ using namespace DirectX;
 #else
 #define GRAPHICSENGINE_DECLSPEC __declspec(dllimport)
 #endif
+
+// ATL 관련 헤더 파일
+#include <atlbase.h>
+#include <atlstr.h>
+#include <atlconv.h>
+
+#pragma comment(lib, "atls.lib");
+

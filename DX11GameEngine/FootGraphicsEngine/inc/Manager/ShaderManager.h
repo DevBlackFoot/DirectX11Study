@@ -38,7 +38,10 @@ namespace GraphicsEngineSpace
 		bool CompileAllShader();
 
 		// 원하는 쉐이더 얻기
-		std::shared_ptr<ShaderBase> GetShader(std::string shaderName);
+		std::shared_ptr<ShaderBase> GetShader(const std::string& shaderName);
+
+		// 매니저 삭제
+		void Finalize();
 
 	private:
 		// 쉐이더 컴파일 코드

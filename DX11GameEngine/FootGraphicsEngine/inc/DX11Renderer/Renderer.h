@@ -12,6 +12,7 @@ namespace GraphicsEngineSpace
 	class DX11GraphicsCore;
 	class MainRenderTarget;
 	class RenderTargetTexture;
+	class TextUI;
 
 	/**
 	 * \brief IRenderer를 상속받아 실제로 구현한 클래스.
@@ -27,17 +28,18 @@ namespace GraphicsEngineSpace
 		HWND hWnd;
 
 		// Device, DC, RS 등이 들어가 있는 코어 클래스
-		DX11GraphicsCore* graphicsCore;
+		std::shared_ptr<DX11GraphicsCore> graphicsCore;
 
 		// View들을 가지고 있는 렌더 타겟 클래스
 		MainRenderTarget* mainRenderTarget;
-		// 테스트용 렌더 타겟
+		// depth debug용 렌더 타겟.
 		RenderTargetTexture* depthRenderTarget;
-
-		// Test용 렌더 타겟 화면 표시
-		std::shared_ptr<IDXObject> depthRenderTargetObj;
+		RenderTargetTexture* normalRenderTarget;
+		RenderTargetTexture* albedoRenderTarget;
+		RenderTargetTexture* worldPosRenderTarget;
 
 		// TODO DXTK에 있는 폰트 넣기
+		TextUI* textTest;
 
 		// Sprite
 		SpriteBatch* spriteBatch;

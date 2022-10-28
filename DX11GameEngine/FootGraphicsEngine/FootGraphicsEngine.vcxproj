@@ -32,6 +32,7 @@
     <ClInclude Include="inc\Factory\Factory.h" />
     <ClInclude Include="inc\GraphicsCore\RenderTargetTexture.h" />
     <ClInclude Include="inc\Manager\BufferManager.h" />
+    <ClInclude Include="inc\Manager\FontManager.h" />
     <ClInclude Include="inc\Manager\SamplerManager.h" />
     <ClInclude Include="inc\Object\LegacyObj.h" />
     <ClInclude Include="inc\Object\Buffer\BufferBase.h" />
@@ -64,6 +65,7 @@
     <ClCompile Include="src\Builder\TextureRectBuilder.cpp" />
     <ClCompile Include="src\GraphicsCore\RenderTargetTexture.cpp" />
     <ClCompile Include="src\Manager\BufferManager.cpp" />
+    <ClCompile Include="src\Manager\FontManager.cpp" />
     <ClCompile Include="src\Manager\SamplerManager.cpp" />
     <ClCompile Include="src\Manager\ShaderManager.cpp" />
     <ClCompile Include="src\DX11Renderer\Renderer.cpp" />
@@ -92,6 +94,8 @@
     <ClCompile Include="src\Object\RenderTargetObj.cpp" />
     <ClCompile Include="src\Object\Shader\PixelShader.cpp" />
     <ClCompile Include="src\Object\Shader\VertexShader.cpp" />
+    <ClCompile Include="src\Object\UI\Canvas.cpp" />
+    <ClCompile Include="src\Object\UI\TextUI.cpp" />
     <ClCompile Include="src\Resources\InputLayout.cpp" />
   </ItemGroup>
   <ItemGroup>

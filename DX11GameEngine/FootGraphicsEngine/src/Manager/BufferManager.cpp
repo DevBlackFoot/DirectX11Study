@@ -55,6 +55,18 @@ namespace GraphicsEngineSpace
 		return true;
 	}
 
+	void BufferManager::Finalize()
+	{
+		for(auto buffer : bufferMap)
+		{
+			buffer.second.reset();
+		}
+
+		bufferMap.clear();
+
+		SafeReset(instance);
+	}
+
 	std::shared_ptr<BufferBase> BufferManager::GetBuffer(std::string bufferName)
 	{
 		if(bufferMap.find(bufferName) == bufferMap.end())
