@@ -19,11 +19,11 @@ namespace GameEngineSpace
 	{
 	}
 
-	void PosColorRenderer::Init(std::string _objName)
+	void PosColorRenderer::Init(std::string _objName, uint64 objID)
 	{
 		// 이 지점에서 새로 리셋
-		renderObj = Factory::GetInstance()->CreateDXObject<PosColorObj>(
-		BuilderManger::GetInstance()->GetBuilder("PosColorBuilder"), _objName);
+		renderObj = Factory::GetInstance()->CreateDXObject<LineObj>(
+		BuilderManger::GetInstance()->GetBuilder("LineBuilder"), _objName, objID);
 
 		// 그려지는 오브젝트로 넣어줍니다.
 		GraphicsManager::GetInstance()->GetRenderer()->AddRenderObj(renderObj);

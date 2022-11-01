@@ -18,14 +18,11 @@ namespace GraphicsEngineSpace
 		// 가장 기본적인 InputLayout 위치와 컬러 정보.
 		static D3D11_INPUT_ELEMENT_DESC PosColor[2];
 
-		// 렌더 타겟 렌더 및 UI 등에서 사용될 위치와 Tex정보
-		static D3D11_INPUT_ELEMENT_DESC TextureRect[2];
-
 		// 노말 맵 정보를 포함하는 레이아웃, 위치, 노말, 텍스쳐, 탄젠트
-		static D3D11_INPUT_ELEMENT_DESC LegacyModel[4];
+		static D3D11_INPUT_ELEMENT_DESC LegacyStatic[4];
 
 		// 스키닝 정보를 담는 레이아웃 위치, 노말, 텍스쳐, 가중치, 본 index
-		static D3D11_INPUT_ELEMENT_DESC SkinnedLayout[5];
+		static D3D11_INPUT_ELEMENT_DESC LegacySkinned[5];
 	};
 
 	/**
@@ -38,8 +35,8 @@ namespace GraphicsEngineSpace
 	public:
 		// Desc를 Inputlayout으로 가지고 있는 변수들
 		static ID3D11InputLayout* PosColor;
-		static ID3D11InputLayout* LegacyModel;
-		static ID3D11InputLayout* SkinnedLayout;
+		static ID3D11InputLayout* LegacyStatic;
+		static ID3D11InputLayout* LegacySkinned;
 	public:
 		// 위의 Desc들을 init하고. InputLayout 형태로 가져올 수 있는 매니저격 클래스
 			// 모두 init.

@@ -19,22 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\Manager\FontManager.h" />
+    <ClInclude Include="inc\Utils\GraphicsRenderingData.h" />
+    <ClInclude Include="inc\Utils\GraphicsTypedef.h" />
     <ClInclude Include="inc\ASEParser\Animation.h" />
     <ClInclude Include="inc\ASEParser\CASEParser.h" />
     <ClInclude Include="inc\ASEParser\CParsingDataClass.h" />
     <ClInclude Include="inc\ASEParser\Lexer\ASEFile.h" />
     <ClInclude Include="inc\ASEParser\Lexer\Lexer.h" />
-    <ClInclude Include="inc\Builder\Basic32Builder.h" />
+    <ClInclude Include="inc\Builder\LegacyStaticBuilder.h" />
     <ClInclude Include="inc\Builder\BuilderManager.h" />
     <ClInclude Include="inc\Builder\IBuilder.h" />
-    <ClInclude Include="inc\Builder\TextureRectBuilder.h" />
     <ClInclude Include="inc\DX11Renderer\IRenderer.h" />
     <ClInclude Include="inc\Factory\Factory.h" />
     <ClInclude Include="inc\GraphicsCore\RenderTargetTexture.h" />
     <ClInclude Include="inc\Manager\BufferManager.h" />
-    <ClInclude Include="inc\Manager\FontManager.h" />
     <ClInclude Include="inc\Manager\SamplerManager.h" />
-    <ClInclude Include="inc\Object\LegacyObj.h" />
+    <ClInclude Include="inc\Object\LegacyStaticObj.h" />
     <ClInclude Include="inc\Object\Buffer\BufferBase.h" />
     <ClInclude Include="inc\Object\Buffer\ConstantBuffer.h" />
     <ClInclude Include="inc\Object\IDXObject.h" />
@@ -42,7 +43,6 @@
     <ClInclude Include="inc\Helper\LightHelper.h" />
     <ClInclude Include="inc\Helper\MathHelper.h" />
     <ClInclude Include="inc\Helper\VertexStruct.h" />
-    <ClInclude Include="inc\Object\RenderTargetObj.h" />
     <ClInclude Include="inc\Object\Shader\PixelShader.h" />
     <ClInclude Include="inc\Object\Shader\ShaderBase.h" />
     <ClInclude Include="inc\Object\Shader\VertexShader.h" />
@@ -55,31 +55,37 @@
     <ClInclude Include="inc\GraphicsPch.h" />
     <ClInclude Include="inc\GraphicsCore\RasterizerState.h" />
     <ClInclude Include="inc\GraphicsCore\MainRenderTarget.h" />
-    <ClInclude Include="inc\Object\PosColorObj.h" />
-    <ClInclude Include="inc\Builder\PosColorBuilder.h" />
+    <ClInclude Include="inc\Object\LineObj.h" />
+    <ClInclude Include="inc\Builder\LineBuilder.h" />
     <ClInclude Include="inc\DX11Renderer\Renderer.h" />
     <ClInclude Include="GraphicsEngineFramework.h" />
     <ClInclude Include="inc\Manager\ShaderManager.h" />
+    <ClInclude Include="inc\Manager\ResourceManager.h" />
+    <ClInclude Include="inc\Resources\Mesh.h" />
+    <ClInclude Include="inc\Resources\Texture.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Builder\TextureRectBuilder.cpp" />
+    <ClCompile Include="src\Manager\FontManager.cpp" />
+    <ClCompile Include="src\Object\UI\Canvas.cpp" />
+    <ClCompile Include="src\Object\UI\TextUI.cpp" />
+    <ClCompile Include="src\Resources\Mesh.cpp" />
+    <ClCompile Include="src\Manager\ResourceManager.cpp" />
     <ClCompile Include="src\GraphicsCore\RenderTargetTexture.cpp" />
     <ClCompile Include="src\Manager\BufferManager.cpp" />
-    <ClCompile Include="src\Manager\FontManager.cpp" />
     <ClCompile Include="src\Manager\SamplerManager.cpp" />
     <ClCompile Include="src\Manager\ShaderManager.cpp" />
     <ClCompile Include="src\DX11Renderer\Renderer.cpp" />
-    <ClCompile Include="src\Builder\PosColorBuilder.cpp" />
-    <ClCompile Include="src\Builder\Basic32Builder.cpp" />
+    <ClCompile Include="src\Builder\LineBuilder.cpp" />
+    <ClCompile Include="src\Builder\LegacyStaticBuilder.cpp" />
     <ClCompile Include="src\ASEParser\CASEParser.cpp" />
     <ClCompile Include="src\ASEParser\CParsingDataClass.cpp" />
     <ClCompile Include="src\ASEParser\Lexer\ASEFile.cpp" />
     <ClCompile Include="src\ASEParser\Lexer\Lexer.cpp" />
     <ClCompile Include="src\Builder\BuilderManager.cpp" />
     <ClCompile Include="src\Object\Buffer\ConstantBuffer.cpp" />
-    <ClCompile Include="src\Object\PosColorObj.cpp" />
+    <ClCompile Include="src\Object\LineObj.cpp" />
     <ClCompile Include="src\Factory\Factory.cpp" />
-    <ClCompile Include="src\Object\LegacyObj.cpp" />
+    <ClCompile Include="src\Object\LegacyStaticObj.cpp" />
     <ClCompile Include="src\GraphicsCore\MainRenderTarget.cpp" />
     <ClCompile Include="src\GraphicsCore\RasterizerState.cpp" />
     <ClCompile Include="src\GraphicsCore\DX11GraphicsCore.cpp" />
@@ -91,12 +97,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Helper\MathHelper.cpp" />
-    <ClCompile Include="src\Object\RenderTargetObj.cpp" />
     <ClCompile Include="src\Object\Shader\PixelShader.cpp" />
     <ClCompile Include="src\Object\Shader\VertexShader.cpp" />
-    <ClCompile Include="src\Object\UI\Canvas.cpp" />
-    <ClCompile Include="src\Object\UI\TextUI.cpp" />
     <ClCompile Include="src\Resources\InputLayout.cpp" />
+    <ClCompile Include="src\Resources\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -192,13 +196,13 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>GraphicsPch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Library\inc\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonLibrary\inc\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library\lib\;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)CommonLibrary\lib\;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -212,7 +216,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>GraphicsPch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Library\inc\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonLibrary\inc\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -220,7 +224,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library\lib\;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)CommonLibrary\lib\;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -232,13 +236,13 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>GraphicsPch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Library\inc\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonLibrary\inc\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library\lib\;$(SolutionDir)Output\DLL\;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)CommonLibrary\lib\;$(SolutionDir)Output\DLL\;</AdditionalLibraryDirectories>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -253,7 +257,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>GraphicsPch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Library\inc\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CommonLibrary\inc\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -261,7 +265,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(SolutionDir)Library\lib\;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)CommonLibrary\lib\;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

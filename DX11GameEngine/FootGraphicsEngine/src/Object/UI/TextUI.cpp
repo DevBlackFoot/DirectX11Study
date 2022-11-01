@@ -73,8 +73,8 @@ namespace GraphicsEngineSpace
 		ID3D11DepthStencilState* depthState = FontManager::GetInstance()->GetDepthState();
 
 		batch->Begin(DirectX::SpriteSortMode_Deferred, nullptr, nullptr, depthState);
-		FontManager::GetInstance()->GetFont(font)->DrawString(batch.get(), text.c_str(), color, GetScreenPosition(), 0.0f
-		, SimpleMath::Vector2{ fontSize / 32.0f, fontSize / 32.0f } * GetScreenScale());
+		FontManager::GetInstance()->GetFont(font)->DrawString(batch.get(), text.c_str(), GetScreenPosition(), color, 0.0f
+		, DirectX::g_XMZero, SimpleMath::Vector2{ fontSize / 32.0f, fontSize / 32.0f } * GetScreenScale());
 		batch->End();
 
 		for(auto iter : children)

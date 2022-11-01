@@ -41,6 +41,7 @@ namespace GraphicsEngineSpace
 
 		// 오브젝트를 분류할 수 있는 이름을 넣어주자..
 		virtual std::string GetObjName() abstract;
+		virtual std::shared_ptr<ObjectResources> GetObjectResources() abstract;
 	};
 
 }

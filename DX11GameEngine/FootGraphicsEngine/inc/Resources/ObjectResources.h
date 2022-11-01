@@ -13,7 +13,7 @@ namespace GraphicsEngineSpace
 	struct ObjectResources
 	{
 		// 버텍스와 인덱스의 오프셋과 카운트
-		int VertexOffset;
+		/*int VertexOffset;
 		UINT IndexOffset;
 		UINT IndexCount;
 
@@ -25,36 +25,39 @@ namespace GraphicsEngineSpace
 		ID3D11RasterizerState* RasterizerState;
 
 		// 토폴로지
-		D3D11_PRIMITIVE_TOPOLOGY Topology;
+		D3D11_PRIMITIVE_TOPOLOGY Topology;*/
 
-		// 텍스쳐를 사용한다면.. 파일 패스
+		// 해당 내용 Mesh로 대체.
+			// 여기서는 ID만 가지고 있도록 한다.
+		uint64 meshID;
+		// ID 중복을 대처하기 위해 Set관련 bool 변수를 넣어준다.
+		bool setMesh;
+
+		/*
 		std::wstring DiffuseMapPathName;
 		std::wstring NormalMapPathName;
+		 */
+		// 각종 맵들의 ID를 가지고 있는 머테리얼의 ID를 가지고 있자
+		uint64 materialID;
+		bool setMaterial;
 
 		// 오브젝트 이름
 		std::string ObjName;
 
 		// 렌더 타겟에서 사용해줄 Shader Resource View
-		ID3D11ShaderResourceView* RenderTargetTexture;
+		//ID3D11ShaderResourceView* RenderTargetTexture;
 
 		ObjectResources()
-			: VertexOffset(0)
-			, IndexOffset(0)
-			, IndexCount(0)
-			, VB(nullptr)
-			, IB(nullptr)
-			, RasterizerState(nullptr)
-			, Topology()
-			, DiffuseMapPathName(L"NONE")
-			, NormalMapPathName(L"NONE")
+			: meshID(0)
+			, setMesh(false)
+			, materialID(0)
+			, setMaterial(false)
 			, ObjName("NULL")
-			, RenderTargetTexture(nullptr)
 		{}
 
 		~ObjectResources()
 		{
-			ReleaseCOM(VB)
-			ReleaseCOM(IB)
+			
 		}
 	};
 }

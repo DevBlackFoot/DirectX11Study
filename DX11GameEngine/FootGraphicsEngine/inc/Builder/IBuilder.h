@@ -1,5 +1,6 @@
 #pragma once
 #include "Resources/ObjectResources.h"
+#include "Utils/GraphicsRenderingData.h"
 
 namespace GraphicsEngineSpace
 {
@@ -15,21 +16,13 @@ namespace GraphicsEngineSpace
 		virtual ~IBuilder() {}
 
 		// 생성된 오브젝트를 받아서, 오브젝트를 세팅해주는 함수를 만든다
-		virtual std::shared_ptr<IDXObject> BuildDXObject(std::shared_ptr<IDXObject> pDXObj, std::string objectName) abstract;
+		// ObjID를 넣어 해당 Obj가 있는지 확인한다.
+		virtual std::shared_ptr<IDXObject> BuildDXObject(std::shared_ptr<IDXObject> pDXObj, std::string objectName, uint64 objectID) abstract;
 
-		// 텍스쳐 파일까지 받는 버전
-			// 이 방식에는 문제가 많아서 (함수가 무한정으로 늘어날 수 있다..)
-			// 이후에 파서와 파싱 데이터 영역을 분리할 수 있으면, 파싱 데이터 영역의 Mat정보를 이용해서
-			// 디퓨즈 맵, 노말 맵 등을 추가한다..
-		virtual std::shared_ptr<IDXObject> BuildDXObject(std::shared_ptr<IDXObject> pDXObj, std::string objectName, std::wstring _texFile) abstract;
-		virtual std::shared_ptr<IDXObject> BuildDXObject(std::shared_ptr<IDXObject> pDXObj, std::string objectName, std::wstring diffuseMap, std::wstring normalMap) abstract;
-
-		// 텍스쳐를 바로 받는 버전
-			// 반드시 구현할 필요는 없다.
-		virtual std::shared_ptr<IDXObject> BuildDXObject(std::shared_ptr<IDXObject> pDXObj, std::string objectName, ID3D11ShaderResourceView* shaderResource)
-		{
-			return nullptr;
-		}
+		// 텍스쳐는 여기에서 Add Texture로 추가해본다.
+			// 변경할 Object를 받고, 추가할 texture ID, Path, name등을 받는다.
+		virtual std::shared_ptr<IDXObject> AddTexture(std::shared_ptr<IDXObject> DXObj, uint64 textureID,
+		                                              std::string textureName, std::wstring path, RenderingData::TextureMapType mapType) abstract;
 
 		// 빌더들의 내부에 존재하는 멤버 변수를 초기화 해주는 Init 함수
 			// 과거 팩토리에 있던 Init을 가져온다고 생각.
@@ -42,7 +35,8 @@ namespace GraphicsEngineSpace
 			// 해당 컨테이너의 내용을 빌더에서 채워서 반환 한 뒤.
 			// 오브젝트에 세팅해준다.
 			// 소연 누나의 구조.
-		virtual std::shared_ptr<ObjectResources> BuildGeometry(std::string objectName) abstract;
+		virtual std::shared_ptr<ObjectResources> BuildGeometry(std::string objectName, uint64 objectID) abstract;
+
 	};
 
 }

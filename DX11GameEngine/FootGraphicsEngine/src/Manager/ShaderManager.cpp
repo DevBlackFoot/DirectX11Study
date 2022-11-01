@@ -37,14 +37,12 @@ namespace GraphicsEngineSpace
 			// 그걸 여기서 줄줄줄 만들어주는 것으로...
 			// 쉐이더를 만들때 템플릿 함수를 부르는 식으로 하기도 했지만.. shaderManager의 맵에 넣어주기 위해서 여기서 해보는 것으로
 		// 버텍스셰이더 생성
-		CreateVertexShader("Shader/PosColor/PosColorVS.hlsl", "main", "vs_5_0", "PosColorVS", InputLayoutDesc::PosColor, 2);
-		CreateVertexShader("Shader/TextureRect/TextureRectVS.hlsl", "main", "vs_5_0", "TextureRectVS", InputLayoutDesc::TextureRect, 2);
-		CreateVertexShader("Shader/LegacyModel/LegacyModelVS.hlsl", "main", "vs_5_0", "LegacyModelVS", InputLayoutDesc::LegacyModel, 4);
+		CreateVertexShader("Shader/LineShader/LineVS.hlsl", "main", "vs_5_0", "LineVS", InputLayoutDesc::PosColor, 2);
+		CreateVertexShader("Shader/LegacyStaticShader/LegacyStaticVS.hlsl", "main", "vs_5_0", "LegacyStaticVS", InputLayoutDesc::LegacyStatic, 4);
 
 		// 픽셀셰이더 생성
-		CreatePixelShader("Shader/PosColor/PosColorPS.hlsl", "main", "ps_5_0", "PosColorPS");
-		CreatePixelShader("Shader/TextureRect/TextureRectPS.hlsl", "main", "ps_5_0", "TextureRectPS");
-		CreatePixelShader("Shader/LegacyModel/LegacyModelPS.hlsl", "main", "ps_5_0", "LegacyModelPS");
+		CreatePixelShader("Shader/LineShader/LinePS.hlsl", "main", "ps_5_0", "LinePS");
+		CreatePixelShader("Shader/LegacyStaticShader/LegacyStaticPS.hlsl", "main", "ps_5_0", "LegacyStaticPS");
 
 		return true;
 	}
@@ -126,6 +124,11 @@ namespace GraphicsEngineSpace
 		const std::string& shaderModel, const std::string& shaderName, D3D11_INPUT_ELEMENT_DESC* desc,
 		UINT elementsSize)
 	{
+		// 맵에 해당 이름의 쉐이더가 있으면 리턴해줍니다
+			// 다시 만들 필요 없기 때문입니다.
+		if(shaderMap.find(shaderName) != shaderMap.end())
+			return false;
+
 		std::shared_ptr<ShaderBase> tmpShader;
 
 		// 혹시 모를 블롭 리셋
@@ -161,6 +164,11 @@ namespace GraphicsEngineSpace
 	bool ShaderManager::CreatePixelShader(const std::string& path, const std::string& entryName,
 		const std::string& shaderModel, const std::string& shaderName)
 	{
+		// 맵에 해당 이름의 쉐이더가 있으면 리턴해줍니다
+			// 다시 만들 필요 없기 때문입니다.
+		if (shaderMap.find(shaderName) != shaderMap.end())
+			return false;
+
 		// 기본적으로 위의 것과 비슷하나 pixelshader를 생성합니다.
 		std::shared_ptr<ShaderBase> tmpShader;
 

@@ -19,7 +19,7 @@ namespace GameEngineSpace
 	public:
 		// 여기서 초기화 할 때, 오브젝트 이름을 넣어준다.
 			// 빌더를 통해서 초기화할 것이기 때문에 지정된 이름을 넣어본다.
-		void Init(std::string _objName);
+		void Init(std::string _objName, uint64 objID);
 
 		void Render() override;
 		void PrepareRender(float tick) override;

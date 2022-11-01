@@ -15,7 +15,7 @@ namespace GameEngineSpace
 
 	public:
 		// 빌더에 필요한 Init 함수.. 가변인자 템플릿을 사용하자.
-		void Init(std::string objName, std::wstring diffuseMap, std::wstring normalMap);
+		void Init(std::string objName, uint64 objID, uint64 diffuseID, std::wstring diffuseMap, uint64 normalID, std::wstring normalMap);
 
 		void Render() override;
 		void PrepareRender(float tick) override;

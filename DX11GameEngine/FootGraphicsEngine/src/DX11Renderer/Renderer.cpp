@@ -17,7 +17,6 @@
 #include "Manager/SamplerManager.h"
 #include "Manager/FontManager.h"
 
-#include "Object/RenderTargetObj.h"
 #include "Object/UI/TextUI.h"
 
 namespace GraphicsEngineSpace

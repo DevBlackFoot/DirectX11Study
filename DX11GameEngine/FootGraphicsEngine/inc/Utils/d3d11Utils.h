@@ -18,6 +18,7 @@
 #include <d3d11.h>
 #include <dxgi.h>
 #include <d3dcompiler.h>
+#include <wrl.h>
 #include "SimpleMath.h"
 
 // 라이브러리 추가
@@ -38,6 +39,9 @@
 #include "BuilderManger.h"
 */
 
+#include <filesystem>
+namespace fs = std::filesystem;
+using namespace Microsoft::WRL;
 using namespace DirectX;
 
 // 스트링, 벡터 등..
@@ -47,14 +51,13 @@ using namespace DirectX;
 #include <fstream>
 #include <vector>
 #include <memory>
-#include <tchar.h>
 
 
 // COM 포인터 Release를 위한 매크로
-#define ReleaseCOM(x) { if(x){ x->Release(); x = 0; } }
+#define ReleaseCOM(x) { if(x){ x->Release();x = 0; } }
 
 // Delete 매크로.
-#define SafeDelete(x) { if(x){ delete x; x = 0; } }
+#define SafeDelete(x) { delete x; x = 0; }
 #define SafeReset(x) { if(x){ x.reset(); x = 0; } }
 
 // HRESULT용 매크로.
@@ -124,10 +127,10 @@ using namespace DirectX;
 #define GRAPHICSENGINE_DECLSPEC __declspec(dllimport)
 #endif
 
+
 // ATL 관련 헤더 파일
 #include <atlbase.h>
 #include <atlstr.h>
 #include <atlconv.h>
 
 #pragma comment(lib, "atls.lib");
-

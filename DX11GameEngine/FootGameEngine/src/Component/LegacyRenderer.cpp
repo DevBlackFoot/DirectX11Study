@@ -19,10 +19,14 @@ namespace GameEngineSpace
 	{
 	}
 
-	void LegacyRenderer::Init(std::string objName, std::wstring diffuseMap, std::wstring normalMap)
+	void LegacyRenderer::Init(std::string objName, uint64 objID, uint64 diffuseID, std::wstring diffuseMap, uint64 normalID, std::wstring normalMap)
 	{
-		renderObj = Factory::GetInstance()->CreateDXObject<LegacyObj>(
-		BuilderManger::GetInstance()->GetBuilder("Basic32Builder"), objName, diffuseMap, normalMap);
+		renderObj = Factory::GetInstance()->CreateDXObject<LegacyStaticObj>(
+		BuilderManger::GetInstance()->GetBuilder("LegacyStaticBuilder"), objName, objID);
+
+		auto legacyBuilder = BuilderManger::GetInstance()->GetBuilder("LegacyStaticBuilder");
+		legacyBuilder->AddTexture(renderObj, diffuseID, "albedo", diffuseMap, RenderingData::TextureMapType::ALBEDO);
+		legacyBuilder->AddTexture(renderObj, normalID, "normal", normalMap, RenderingData::TextureMapType::NORMAL);
 
 		GraphicsManager::GetInstance()->GetRenderer()->AddRenderObj(renderObj);
 	}

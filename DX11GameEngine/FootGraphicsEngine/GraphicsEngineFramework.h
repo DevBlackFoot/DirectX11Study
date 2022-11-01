@@ -12,11 +12,14 @@
 // 팩토리와 빌더, 각종 오브젝트
 #include "inc/Factory/Factory.h"
 #include "inc/Builder/BuilderManager.h"
-#include "inc/Object/PosColorObj.h"
-#include "inc/Object/LegacyObj.h"
+#include "inc/Object/LineObj.h"
+#include "inc/Object/LegacyStaticObj.h"
 
 
 // 각종 구조체
 #include "inc/Helper/LightHelper.h"
 #include "inc/Helper/VertexStruct.h"
 #include "inc/Helper/MathHelper.h"
+
+// 그래픽 렌더링 데이터
+#include "inc/Utils/GraphicsRenderingData.h"

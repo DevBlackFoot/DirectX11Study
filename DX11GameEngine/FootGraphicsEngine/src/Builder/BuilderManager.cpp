@@ -1,9 +1,8 @@
 #include "GraphicsPch.h"
 #include "Builder/BuilderManager.h"
 #include "Builder/IBuilder.h"
-#include "Builder/Basic32Builder.h"
-#include "Builder/PosColorBuilder.h"
-#include "Builder/TextureRectBuilder.h"
+#include "Builder/LegacyStaticBuilder.h"
+#include "Builder/LineBuilder.h"
 
 // 추가할 빌더들을 include 해준다.
 	// TODO : 시간 될 때 묶을 수 있는 것들을 묶어보자
@@ -27,9 +26,8 @@ namespace GraphicsEngineSpace
 		m_D3DDeviceContext = pDeviceContext;
 
 		// 만들어둔 템플릿 함수로 넣어보기
-		AddBuilder<Basic32Builder>("Basic32Builder");
-		AddBuilder<PosColorBuilder>("PosColorBuilder");
-		AddBuilder<TextureRectBuilder>("TextureRectBuilder");
+		AddBuilder<LegacyStaticBuilder>("LegacyStaticBuilder");
+		AddBuilder<LineBuilder>("LineBuilder");
 	}
 
 
