@@ -19,9 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shader", "Shader", "{170554
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LegacyStaticShader", "LegacyStaticShader", "{17112375-8C00-43AB-BCE2-3C11C120BCF7}"
 	ProjectSection(SolutionItems) = preProject
-		Output\Shader\LegacyStaticShader\LegacyStaticlVS.hlsl = Output\Shader\LegacyStaticShader\LegacyStaticlVS.hlsl
 		Output\Shader\LegacyStaticShader\LegacyStaticPS.hlsl = Output\Shader\LegacyStaticShader\LegacyStaticPS.hlsl
 		Output\Shader\LegacyStaticShader\LegacyStaticTypes.hlsli = Output\Shader\LegacyStaticShader\LegacyStaticTypes.hlsli
+		Output\Shader\LegacyStaticShader\LegacyStaticVS.hlsl = Output\Shader\LegacyStaticShader\LegacyStaticVS.hlsl
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LineShader", "LineShader", "{5809C03E-F7CF-4EF3-82AA-4848461C46B7}"
@@ -29,6 +29,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LineShader", "LineShader", 
 		Output\Shader\LineShader\LinePS.hlsl = Output\Shader\LineShader\LinePS.hlsl
 		Output\Shader\LineShader\LineTypes.hlsli = Output\Shader\LineShader\LineTypes.hlsli
 		Output\Shader\LineShader\LineVS.hlsl = Output\Shader\LineShader\LineVS.hlsl
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SkyBoxShader", "SkyBoxShader", "{5F391376-EC24-4791-BF86-1780474A6406}"
+	ProjectSection(SolutionItems) = preProject
+		Output\Shader\SkyBoxShader\SkyBoxPS.hlsl = Output\Shader\SkyBoxShader\SkyBoxPS.hlsl
+		Output\Shader\SkyBoxShader\SkyBoxTypes.hlsli = Output\Shader\SkyBoxShader\SkyBoxTypes.hlsli
+		Output\Shader\SkyBoxShader\SkyBoxVS.hlsl = Output\Shader\SkyBoxShader\SkyBoxVS.hlsl
 	EndProjectSection
 EndProject
 Global
@@ -70,6 +77,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{17112375-8C00-43AB-BCE2-3C11C120BCF7} = {17055483-4098-4453-BDE5-ABEFD56B7382}
 		{5809C03E-F7CF-4EF3-82AA-4848461C46B7} = {17055483-4098-4453-BDE5-ABEFD56B7382}
+		{5F391376-EC24-4791-BF86-1780474A6406} = {17055483-4098-4453-BDE5-ABEFD56B7382}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {994FC6B7-665F-4120-91F6-33D91CFD6388}

@@ -28,6 +28,7 @@ namespace GraphicsEngineSpace
 		// 버퍼 하나 만들어 봅시다.
 			// 마지막의 typeSize는 안에 들어가는 전체의 사이즈가 나온다..
 		CreateConstantBuffer("MatrixCB", sizeof(SimpleMath::Matrix) * 3);
+		CreateConstantBuffer("WorldViewProjCB", sizeof(SimpleMath::Matrix));
 
 		CreateConstantBuffer("ViewPosCB", sizeof(SimpleMath::Vector4));
 

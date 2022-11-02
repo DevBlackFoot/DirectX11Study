@@ -11,13 +11,10 @@
 // 일단 지금은 이렇게 해두고, 나중에 필요에 따라 변경하는 것으로 한다.
 
 // 기본적인 상수 버퍼
-cbuffer cbPerObject : register( b0 )
+cbuffer cbPerFrame : register(b0)
 {
     float4x4 WorldViewProj;
-    float4x4 World;
-    float4x4 WorldInvTranspose;
-}
-
+};
 
 // 버텍스 쉐이더에 들어오는 값
 struct VS_Input

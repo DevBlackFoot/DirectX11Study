@@ -14,7 +14,8 @@
 #include "inc/Builder/BuilderManager.h"
 #include "inc/Object/LineObj.h"
 #include "inc/Object/LegacyStaticObj.h"
-
+#include "inc/Object/SkyBox.h"
+#include "inc/Object/IDXObject.h"
 
 // 각종 구조체
 #include "inc/Helper/LightHelper.h"

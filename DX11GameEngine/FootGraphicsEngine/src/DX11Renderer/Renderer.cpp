@@ -5,13 +5,14 @@
 #include <d3dcompiler.h>
 #include "Object/IDXObject.h"
 #include "GraphicsCore/DX11GraphicsCore.h"
-#include "GraphicsCore/MainRenderTarget.h"
+#include "GraphicsCore/RenderTargetDepth.h"
 #include "GraphicsCore/RenderTargetTexture.h"
-
 #include "GraphicsCore/RasterizerState.h"
+
 #include "Resources/InputLayout.h"
 #include "Builder/BuilderManager.h"
 #include "Factory/Factory.h"
+
 #include "Manager/ShaderManager.h"
 #include "Manager/BufferManager.h"
 #include "Manager/SamplerManager.h"
@@ -31,6 +32,8 @@ namespace GraphicsEngineSpace
 		, normalRenderTarget(nullptr)
 		, albedoRenderTarget(nullptr)
 		, worldPosRenderTarget(nullptr)
+		, screenViewport()
+		, textTest(nullptr)
 		, spriteBatch(nullptr)
 		, deltaTime(0.0f)
 		, minimized(false)
@@ -56,7 +59,7 @@ namespace GraphicsEngineSpace
 		// 각종 디바이스 등 초기화.
 		graphicsCore->Initialize(hWnd, clientWidth, clientHeight);
 
-		mainRenderTarget = new MainRenderTarget;
+		mainRenderTarget = new RenderTargetDepth;
 		depthRenderTarget = new RenderTargetTexture;
 		normalRenderTarget = new RenderTargetTexture;
 		albedoRenderTarget = new RenderTargetTexture;
@@ -83,9 +86,6 @@ namespace GraphicsEngineSpace
 		// 스프라이트 생성
 		spriteBatch = new DirectX::SpriteBatch(deviceContext);
 		FontManager::GetInstance()->Init(device, spriteBatch, mainRenderTarget->GetDepthStencilState());
-
-		// Text Test
-
 
 		// 여기까지 하면 성공
 		return true;
@@ -119,7 +119,7 @@ namespace GraphicsEngineSpace
 		SafeDelete(normalRenderTarget);
 		SafeDelete(albedoRenderTarget);
 		SafeDelete(worldPosRenderTarget);
-
+		SafeDelete(textTest);
 	}
 
 	void Renderer::OnResize()
@@ -146,16 +146,17 @@ namespace GraphicsEngineSpace
 		worldPosRenderTarget->Finalize();
 		worldPosRenderTarget->Init(device, clientWidth, clientHeight, graphicsCore->GetMSAAQuality());
 
-		// 뷰포트 설정.
-		D3D11_VIEWPORT _vp;
-		_vp.TopLeftX = 0.0f;
-		_vp.TopLeftY = 0.0f;
-		_vp.Width = static_cast<float>(clientWidth);
-		_vp.Height = static_cast<float>(clientHeight);
-		_vp.MinDepth = 0.0f;
-		_vp.MaxDepth = 1.0f;
+		// Screen Viewport 세팅
+		screenViewport.TopLeftX = 0.0f;
+		screenViewport.TopLeftY = 0.0f;
+		screenViewport.Width = static_cast<float>(clientWidth);
+		screenViewport.Height = static_cast<float>(clientHeight);
+		screenViewport.MinDepth = 0.0f;
+		screenViewport.MaxDepth = 1.0f;
 
-		deviceContext->RSSetViewports(1, &_vp);
+
+		// 뷰포트 설정.
+		deviceContext->RSSetViewports(1, &screenViewport);
 	}
 
 	void Renderer::RenderAll()
@@ -211,9 +212,6 @@ namespace GraphicsEngineSpace
 
 	void Renderer::BeginRender()
 	{
-		// 이 지점에서 업데이트 해보자..
-		//depthRenderTargetObj->Update(XMMatrixIdentity(), XMMatrixIdentity(), XMMatrixIdentity());
-
 		graphicsCore->ResetView(
 			mainRenderTarget->GetRenderTargetView(),
 			mainRenderTarget->GetDepthStencilView(),
@@ -259,14 +257,12 @@ namespace GraphicsEngineSpace
 
 	void Renderer::Render()
 	{
-
 		// 각종 렌더.
 		for (auto obj : renderVector)
 		{
 			obj->Render();
 		}
-
-
+		
 		graphicsCore->ResetRS();
 	}
 

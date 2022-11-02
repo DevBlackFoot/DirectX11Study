@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\Builder\SkyBoxBuilder.h" />
     <ClInclude Include="inc\Manager\FontManager.h" />
+    <ClInclude Include="inc\Object\SkyBox.h" />
     <ClInclude Include="inc\Utils\GraphicsRenderingData.h" />
     <ClInclude Include="inc\Utils\GraphicsTypedef.h" />
     <ClInclude Include="inc\ASEParser\Animation.h" />
@@ -54,7 +56,7 @@
     <ClInclude Include="inc\Utils\d3d11Utils.h" />
     <ClInclude Include="inc\GraphicsPch.h" />
     <ClInclude Include="inc\GraphicsCore\RasterizerState.h" />
-    <ClInclude Include="inc\GraphicsCore\MainRenderTarget.h" />
+    <ClInclude Include="inc\GraphicsCore\RenderTargetDepth.h" />
     <ClInclude Include="inc\Object\LineObj.h" />
     <ClInclude Include="inc\Builder\LineBuilder.h" />
     <ClInclude Include="inc\DX11Renderer\Renderer.h" />
@@ -65,7 +67,9 @@
     <ClInclude Include="inc\Resources\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Builder\SkyBoxBuilder.cpp" />
     <ClCompile Include="src\Manager\FontManager.cpp" />
+    <ClCompile Include="src\Object\SkyBox.cpp" />
     <ClCompile Include="src\Object\UI\Canvas.cpp" />
     <ClCompile Include="src\Object\UI\TextUI.cpp" />
     <ClCompile Include="src\Resources\Mesh.cpp" />
@@ -86,7 +90,7 @@
     <ClCompile Include="src\Object\LineObj.cpp" />
     <ClCompile Include="src\Factory\Factory.cpp" />
     <ClCompile Include="src\Object\LegacyStaticObj.cpp" />
-    <ClCompile Include="src\GraphicsCore\MainRenderTarget.cpp" />
+    <ClCompile Include="src\GraphicsCore\RenderTargetDepth.cpp" />
     <ClCompile Include="src\GraphicsCore\RasterizerState.cpp" />
     <ClCompile Include="src\GraphicsCore\DX11GraphicsCore.cpp" />
     <ClCompile Include="src\DLL\dllmain.cpp" />

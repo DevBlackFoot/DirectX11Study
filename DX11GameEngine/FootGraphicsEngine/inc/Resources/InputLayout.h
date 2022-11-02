@@ -23,6 +23,9 @@ namespace GraphicsEngineSpace
 
 		// 스키닝 정보를 담는 레이아웃 위치, 노말, 텍스쳐, 가중치, 본 index
 		static D3D11_INPUT_ELEMENT_DESC LegacySkinned[5];
+
+		// 스카이 박스 DESC
+		static D3D11_INPUT_ELEMENT_DESC SkyBox[1];
 	};
 
 	/**

@@ -29,13 +29,10 @@ namespace GraphicsEngineSpace
 		XMMATRIX view;
 		XMMATRIX proj;
 
-		// 안에 들어가는 cb들.
-			// 실제로 사용하는 것은 worldViewProj 밖에 없겠지만..
+		// 안에 들어가는 cb
 		struct cbMatrix
 		{
 			SimpleMath::Matrix worldViewProj;
-			SimpleMath::Matrix worldTransform;
-			SimpleMath::Matrix worldInvTranspose;
 		};
 
 	public:

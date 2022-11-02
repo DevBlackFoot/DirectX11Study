@@ -7,8 +7,6 @@ namespace GraphicsEngineSpace
 	class IDXObject;
 }
 
-class GraphicsEngineSpace::IDXObject;
-
 namespace GameEngineSpace
 {
 	class GameObject;

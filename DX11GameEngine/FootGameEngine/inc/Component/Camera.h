@@ -3,6 +3,11 @@
 
 //#include "Utils/ColliderUtils/BoundingVolumes.h"
 
+namespace GraphicsEngineSpace
+{
+	class IDXObject;
+}
+
 namespace GameEngineSpace
 {
 	class Transform;
@@ -40,6 +45,7 @@ namespace GameEngineSpace
 			// ViewFrustum 컬링, 스카이 박스 등의 기능 추가시 필요.
 		// Frustum
 		//std::shared_ptr<BoundingFrustum> viewFrustum;
+		std::shared_ptr<GraphicsEngineSpace::IDXObject> skyBox;
 
 		// Shaking factor
 		float shakingIntensity;
@@ -71,6 +77,7 @@ namespace GameEngineSpace
 		const Matrix& GetProjMatrix();
 
 		virtual void Update(float tick) override;
+		virtual void LateUpdate(float tick) override;
 
 		// 프러스텀 설정.
 		void SetLens(float _fovY, float _aspect, float _nearZ, float _farZ);

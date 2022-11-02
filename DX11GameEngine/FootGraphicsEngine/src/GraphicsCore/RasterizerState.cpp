@@ -5,8 +5,8 @@
 namespace GraphicsEngineSpace
 {
 	// 스태틱 변수 초기화
-	ID3D11RasterizerState* RasterizerState::m_WireFrameRS = nullptr;
-	ID3D11RasterizerState* RasterizerState::m_SolidRS = nullptr;
+	ID3D11RasterizerState* RasterizerState::wireFrameRS = nullptr;
+	ID3D11RasterizerState* RasterizerState::solidRS = nullptr;
 
 	bool RasterizerState::InitAllRS(ID3D11Device* pDevice)
 	{
@@ -18,17 +18,17 @@ namespace GraphicsEngineSpace
 		rsDesc.FrontCounterClockwise = false;
 		rsDesc.DepthClipEnable = true;
 
-		HR(pDevice->CreateRasterizerState(&rsDesc, &m_WireFrameRS));
+		HR(pDevice->CreateRasterizerState(&rsDesc, &wireFrameRS));
 
 		rsDesc.FillMode = D3D11_FILL_SOLID;
-		HR(pDevice->CreateRasterizerState(&rsDesc, &m_SolidRS));
+		HR(pDevice->CreateRasterizerState(&rsDesc, &solidRS));
 
 		return true;
 	}
 
 	void RasterizerState::DestroyAll()
 	{
-		ReleaseCOM(m_WireFrameRS)
-		ReleaseCOM(m_SolidRS)
+		ReleaseCOM(wireFrameRS)
+		ReleaseCOM(solidRS)
 	}
 }

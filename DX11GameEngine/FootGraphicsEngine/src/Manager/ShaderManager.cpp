@@ -39,10 +39,13 @@ namespace GraphicsEngineSpace
 		// 버텍스셰이더 생성
 		CreateVertexShader("Shader/LineShader/LineVS.hlsl", "main", "vs_5_0", "LineVS", InputLayoutDesc::PosColor, 2);
 		CreateVertexShader("Shader/LegacyStaticShader/LegacyStaticVS.hlsl", "main", "vs_5_0", "LegacyStaticVS", InputLayoutDesc::LegacyStatic, 4);
+		CreateVertexShader("Shader/SkyBoxShader/SkyBoxVS.hlsl", "main", "vs_5_0", "SkyBoxVS", InputLayoutDesc::SkyBox, 1);
 
 		// 픽셀셰이더 생성
 		CreatePixelShader("Shader/LineShader/LinePS.hlsl", "main", "ps_5_0", "LinePS");
 		CreatePixelShader("Shader/LegacyStaticShader/LegacyStaticPS.hlsl", "main", "ps_5_0", "LegacyStaticPS");
+		CreatePixelShader("Shader/SkyBoxShader/SkyBoxPS.hlsl", "main", "ps_5_0", "SkyBoxPS");
+
 
 		return true;
 	}

@@ -5,7 +5,7 @@
     <ClInclude Include="inc\Utils\d3d11Utils.h" />
     <ClInclude Include="inc\GraphicsCore\DX11GraphicsCore.h" />
     <ClInclude Include="inc\GraphicsCore\RasterizerState.h" />
-    <ClInclude Include="inc\GraphicsCore\MainRenderTarget.h" />
+    <ClInclude Include="inc\GraphicsCore\RenderTargetDepth.h" />
     <ClInclude Include="inc\Helper\LightHelper.h" />
     <ClInclude Include="inc\Helper\MathHelper.h" />
     <ClInclude Include="inc\Helper\VertexStruct.h" />
@@ -45,13 +45,15 @@
     <ClInclude Include="inc\Resources\Texture.h" />
     <ClInclude Include="inc\Utils\GraphicsRenderingData.h" />
     <ClInclude Include="inc\Manager\FontManager.h" />
+    <ClInclude Include="inc\Builder\SkyBoxBuilder.h" />
+    <ClInclude Include="inc\Object\SkyBox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GraphicsPch.cpp" />
     <ClCompile Include="src\DLL\dllmain.cpp" />
     <ClCompile Include="src\GraphicsCore\DX11GraphicsCore.cpp" />
     <ClCompile Include="src\GraphicsCore\RasterizerState.cpp" />
-    <ClCompile Include="src\GraphicsCore\MainRenderTarget.cpp" />
+    <ClCompile Include="src\GraphicsCore\RenderTargetDepth.cpp" />
     <ClCompile Include="src\Helper\MathHelper.cpp" />
     <ClCompile Include="src\Object\LegacyStaticObj.cpp" />
     <ClCompile Include="src\Resources\InputLayout.cpp" />
@@ -78,6 +80,8 @@
     <ClCompile Include="src\Object\UI\Canvas.cpp" />
     <ClCompile Include="src\Object\UI\TextUI.cpp" />
     <ClCompile Include="src\Manager\FontManager.cpp" />
+    <ClCompile Include="src\Builder\SkyBoxBuilder.cpp" />
+    <ClCompile Include="src\Object\SkyBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

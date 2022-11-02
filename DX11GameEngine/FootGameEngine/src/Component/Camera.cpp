@@ -1,8 +1,11 @@
 #include "GamePch.h"
 #include "Component/Camera.h"
 
+#include "../../FootGraphicsEngine/GraphicsEngineFramework.h"
+
 #include "Object/GameObject.h"
 #include "WindowManager/WindowManager.h"
+#include "GraphicsManager/GraphicsManager.h"
 
 namespace GameEngineSpace
 {
@@ -26,6 +29,16 @@ namespace GameEngineSpace
 
 		UpdateViewMatrix();
 
+		// 큐브맵 생성
+		skyBox = Factory::GetInstance()->CreateDXObject<SkyBox>(
+		BuilderManger::GetInstance()->GetBuilder("SkyBoxBuilder"), "skyBox", 0
+		);
+
+		auto skyBoxBuilder = BuilderManger::GetInstance()->GetBuilder("SkyBoxBuilder");
+
+		skyBoxBuilder->AddTexture(skyBox, 0, "skyBoxTex", L"Resources/Texture/snowcube1024.dds", RenderingData::TextureMapType::CUBE);
+
+		GraphicsManager::GetInstance()->GetRenderer()->AddRenderObj(skyBox);
 	}
 
 	Camera::~Camera()
@@ -66,50 +79,7 @@ namespace GameEngineSpace
 
 
 		transform->SetLook(Vector3{newLook.x, newLook.y, newLook.z});
-		//transform->SetLook(Vector3{ worldTM.m[2][0], worldTM.m[2][1], worldTM.m[2][2]});
-
-		// 위에서 구한 view TM을 이용해서 카메라의 look과 up right를 구할 수 있는가.
-		// 카메라가 바라보는 방향에 대한 이해가 필요. -> 카메라가 어디를 보고 있는가.. 원점을 기준으로 도는 이유는
-		// 카메라가 보는 위치기 계속 원점이었기 때문이 아닐까..
-
-		// 사실 카메라의 회전값을 바탕으로 right up look을 뽑아내고.. 해당 내용을 바탕으로 view matrix를 만들어야한다..
-		//view = ViewMatrix(transform->GetWorldPosition(), transform->GetWorldRotation());
-		// 그게 사실상 이 지점이었다.
-			// 내부적으로 카메라의 position과 rotation을 사용해서 view vector를 뽑아냈다.
-
-		/*Vector3 rot = transform->GetWorldRotation();
-
-		Matrix tempRot = Matrix::CreateRotationZ(rot.z) *
-			Matrix::CreateRotationX(rot.x) * Matrix::CreateRotationY(rot.y);
-
-		Vector3 right = Vector3{tempRot.m[0][0], tempRot.m[0][1], tempRot.m[0][2]};
-		Vector3 up = Vector3{ tempRot.m[1][0], tempRot.m[1][1], tempRot.m[1][2] };
-		Vector3 look = Vector3{ tempRot.m[2][0], tempRot.m[2][1], tempRot.m[2][2] };
-		Vector3 pos = transform->GetWorldPosition();
-
-		float dotX = right.Dot(pos);
-		float dotY = up.Dot(pos);
-		float dotZ = look.Dot(pos);
-
-		view.m[0][0] = right.x;
-		view.m[1][0] = right.y;
-		view.m[2][0] = right.z;
-		view.m[3][0] = -dotX;
-
-		view.m[0][1] = up.x;
-		view.m[1][1] = up.y;
-		view.m[2][1] = up.z;
-		view.m[3][1] = -dotY;
-
-		view.m[0][2] = look.x;
-		view.m[1][2] = look.y;
-		view.m[2][2] = look.z;
-		view.m[3][2] = -dotZ;
-
-		view.m[0][3] = 0.f;
-		view.m[1][3] = 0.f;
-		view.m[2][3] = 0.f;
-		view.m[3][3] = 1.0f;*/
+		
 	}
 
 	void Camera::UpdateProjMatrix()
@@ -473,6 +443,20 @@ namespace GameEngineSpace
 
 			shakingIntensity = 0.0f;
 		}*/
+
+		Matrix _view = view;
+		_view.m[3][0] = 0.f;
+		_view.m[3][1] = 0.f;
+		_view.m[3][2] = 0.f;
+		_view.m[3][3] = 1.f;
+
+		skyBox->Update(Matrix::Identity, _view, proj);
+	}
+
+	void Camera::LateUpdate(float tick)
+	{
+		// 스카이 박스 그려주기
+		skyBox->Render();
 	}
 
 	void Camera::SetLens(float _fovY, float _aspect, float _nearZ, float _farZ)

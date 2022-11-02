@@ -34,7 +34,6 @@ namespace GraphicsEngineSpace
 	const uint64& ResourceManager::LoadTexture(const std::string& textureName, const std::wstring& path)
 	{
 		std::shared_ptr<Texture> newTexture = std::make_shared<Texture>();
-
 		newTexture->SetResourceID(resourceID++);
 
 		newTexture->Initialize(textureName, path);

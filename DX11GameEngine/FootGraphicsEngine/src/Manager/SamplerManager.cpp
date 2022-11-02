@@ -54,6 +54,30 @@ namespace GraphicsEngineSpace
 
 		if (FAILED(hr) == true)
 			::MessageBoxA(nullptr, "Sampler Create Failed!", nullptr, MB_OK);
+
+		D3D11_SAMPLER_DESC samDesc3;
+
+		samDesc3.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+		samDesc3.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+		samDesc3.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+		samDesc3.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+			   
+		samDesc3.MipLODBias = 0.f;
+		samDesc3.MaxAnisotropy = 2;
+		samDesc3.ComparisonFunc = D3D11_COMPARISON_NEVER;
+		samDesc3.BorderColor[0] = 0.f;
+		samDesc3.BorderColor[1] = 0.f;
+		samDesc3.BorderColor[2] = 0.f;
+		samDesc3.BorderColor[3] = 0.f;
+			   
+		samDesc3.MinLOD = -FLT_MAX;
+		samDesc3.MaxLOD = FLT_MAX;
+
+		hr = device->CreateSamplerState(&samDesc3, &triLinearSamplerState);
+
+		if (FAILED(hr) == true)
+			::MessageBoxA(nullptr, "Sampler Create Failed!", nullptr, MB_OK);
+
 	}
 
 	void SamplerManager::Release()

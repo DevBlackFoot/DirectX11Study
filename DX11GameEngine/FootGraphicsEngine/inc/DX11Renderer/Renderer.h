@@ -10,7 +10,7 @@ using namespace DirectX::SimpleMath;
 namespace GraphicsEngineSpace
 {
 	class DX11GraphicsCore;
-	class MainRenderTarget;
+	class RenderTargetDepth;
 	class RenderTargetTexture;
 	class TextUI;
 
@@ -31,14 +31,18 @@ namespace GraphicsEngineSpace
 		std::shared_ptr<DX11GraphicsCore> graphicsCore;
 
 		// View들을 가지고 있는 렌더 타겟 클래스
-		MainRenderTarget* mainRenderTarget;
+		RenderTargetDepth* mainRenderTarget;
+
 		// depth debug용 렌더 타겟.
 		RenderTargetTexture* depthRenderTarget;
 		RenderTargetTexture* normalRenderTarget;
 		RenderTargetTexture* albedoRenderTarget;
 		RenderTargetTexture* worldPosRenderTarget;
 
-		// TODO DXTK에 있는 폰트 넣기
+		// 스크린에서 사용하는 뷰포트의 DESC를 정해둔 screenViewport
+			// CubeMap을 그리기 위한 Viewport를 따로 설정해줘야하기 때문에..
+		D3D11_VIEWPORT screenViewport;
+
 		TextUI* textTest;
 
 		// Sprite

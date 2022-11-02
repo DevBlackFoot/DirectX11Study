@@ -69,6 +69,8 @@ namespace GraphicsEngineSpace
 		{
 			// 있다면 해당 ID를 넣어주고 리턴한다.
 			_objRes->meshID = objectID;
+			_objRes->setMesh = true;
+
 			return _objRes;
 		}
 
@@ -110,6 +112,8 @@ namespace GraphicsEngineSpace
 			RasterizerState::GetWireFrameRS(),
 			objectID);
 
+		_objRes->setMesh = true;
+
 		return _objRes;
 	}
 
@@ -120,6 +124,8 @@ namespace GraphicsEngineSpace
 		{
 			// 있다면 해당 ID를 넣어주고 리턴한다.
 			_objRes->meshID = objectID;
+			_objRes->setMesh = true;
+
 			return _objRes;
 		}
 
@@ -156,6 +162,8 @@ namespace GraphicsEngineSpace
 			D3D11_PRIMITIVE_TOPOLOGY_LINELIST,
 			RasterizerState::GetWireFrameRS(),
 			objectID);
+		_objRes->setMesh = true;
+
 
 		return _objRes;
 	}

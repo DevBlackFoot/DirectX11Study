@@ -1,7 +1,6 @@
 #include "GamePch.h"
 #include "Component/PosColorRenderer.h"
 
-#include "../../../FootGraphicsEngine/inc/Object/IDXObject.h"
 #include "../../FootGraphicsEngine/GraphicsEngineFramework.h"
 
 #include "Component/Camera.h"

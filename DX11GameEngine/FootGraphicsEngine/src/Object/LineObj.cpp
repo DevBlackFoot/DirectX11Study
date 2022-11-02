@@ -79,7 +79,7 @@ namespace GraphicsEngineSpace
 		// 데이터는 constBuffer와 닮은꼴의 구조체를 던져야함.
 		cbMatrix cbPerObj;
 		cbPerObj.worldViewProj = world * view * proj;
-		BufferManager::GetInstance()->GetBuffer("MatrixCB")->SetUpBuffer(0, &cbPerObj, ShaderType::VERTEX);
+		BufferManager::GetInstance()->GetBuffer("WorldViewProjCB")->SetUpBuffer(0, &cbPerObj, ShaderType::VERTEX);
 
 
 		D3DDeviceContext->RSSetState(mesh->GetRasterState().Get());

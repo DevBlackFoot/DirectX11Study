@@ -7,6 +7,12 @@ namespace GraphicsEngineSpace
 	// 각종 버텍스 구조체 정보.
 	namespace VertexStruct
 	{
+		// SkyBox를 위한 위치 정보만 있는 버텍스
+		struct SkyBoxVertex
+		{
+			XMFLOAT3 Pos;
+		};
+
 		// 가장 기본적인 색과 위치 정보를 가지고 있는 버텍스 구조체
 		struct ColorVertex
 		{
