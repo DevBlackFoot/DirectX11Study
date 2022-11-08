@@ -44,9 +44,10 @@
     <ClInclude Include="inc\Resources\Mesh.h" />
     <ClInclude Include="inc\Resources\Texture.h" />
     <ClInclude Include="inc\Utils\GraphicsRenderingData.h" />
-    <ClInclude Include="inc\Manager\FontManager.h" />
+    <ClInclude Include="inc\Manager\UIUtilsManager.h" />
     <ClInclude Include="inc\Builder\SkyBoxBuilder.h" />
     <ClInclude Include="inc\Object\SkyBox.h" />
+    <ClInclude Include="inc\Object\UI\SpriteUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GraphicsPch.cpp" />
@@ -79,9 +80,10 @@
     <ClCompile Include="src\Resources\Texture.cpp" />
     <ClCompile Include="src\Object\UI\Canvas.cpp" />
     <ClCompile Include="src\Object\UI\TextUI.cpp" />
-    <ClCompile Include="src\Manager\FontManager.cpp" />
+    <ClCompile Include="src\Manager\UIUtilsManager.cpp" />
     <ClCompile Include="src\Builder\SkyBoxBuilder.cpp" />
     <ClCompile Include="src\Object\SkyBox.cpp" />
+    <ClCompile Include="src\Object\UI\SpriteUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

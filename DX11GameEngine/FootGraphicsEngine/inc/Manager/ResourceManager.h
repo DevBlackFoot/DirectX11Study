@@ -2,6 +2,12 @@
 #include "GraphicsCore/RasterizerState.h"
 #include "Resources/Mesh.h"
 
+#ifdef FOOTGRAPHICSENGINE_EXPORTS
+#define GRAPHICSENGINE_DECLSPEC __declspec(dllexport)
+#else
+#define GRAPHICSENGINE_DECLSPEC __declspec(dllimport)
+#endif
+
 namespace GraphicsEngineSpace
 {
 	class Texture;
@@ -10,7 +16,8 @@ namespace GraphicsEngineSpace
 
 	struct Material;
 
-	class ResourceManager
+	// 게임 엔진에서 사용 가능하도록 DLL Export를 해준다.
+	class GRAPHICSENGINE_DECLSPEC ResourceManager
 	{
 	private:
 		static std::shared_ptr<ResourceManager> instance;
@@ -34,14 +41,14 @@ namespace GraphicsEngineSpace
 		std::unordered_map<uint64, std::shared_ptr<RenderingData::Material>> materials;
 
 	public:
-		std::shared_ptr<Texture> GetTexture(const uint64& _resourceID);
+		virtual std::shared_ptr<Texture> GetTexture(const uint64& _resourceID);
 
-		std::shared_ptr<Mesh> GetMesh(const uint64& _resourceID);
+		virtual	std::shared_ptr<Mesh> GetMesh(const uint64& _resourceID);
 
-		std::shared_ptr<RenderingData::Material> GetMaterial(const uint64& _resourceID);
+		virtual std::shared_ptr<RenderingData::Material> GetMaterial(const uint64& _resourceID);
 
 		// 텍스쳐를 로드하여 textures에 저장하고 resourceID를 return 합니다.
-		const uint64& LoadTexture(const std::string& textureName, const std::wstring& path);
+		virtual const uint64& LoadTexture(const std::string& textureName, const std::wstring& path);
 
 		// 머터리얼을 mateirals에 저장하고 resourceID를 return 합니다.
 		const uint64& AddMaterial(std::shared_ptr<RenderingData::Material> material);

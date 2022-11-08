@@ -20,8 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\Builder\SkyBoxBuilder.h" />
-    <ClInclude Include="inc\Manager\FontManager.h" />
+    <ClInclude Include="inc\Manager\UIUtilsManager.h" />
     <ClInclude Include="inc\Object\SkyBox.h" />
+    <ClInclude Include="inc\Object\UI\SpriteUI.h" />
     <ClInclude Include="inc\Utils\GraphicsRenderingData.h" />
     <ClInclude Include="inc\Utils\GraphicsTypedef.h" />
     <ClInclude Include="inc\ASEParser\Animation.h" />
@@ -68,10 +69,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Builder\SkyBoxBuilder.cpp" />
-    <ClCompile Include="src\Manager\FontManager.cpp" />
+    <ClCompile Include="src\Manager\UIUtilsManager.cpp" />
     <ClCompile Include="src\Object\SkyBox.cpp" />
     <ClCompile Include="src\Object\UI\Canvas.cpp" />
     <ClCompile Include="src\Object\UI\TextUI.cpp" />
+    <ClCompile Include="src\Object\UI\SpriteUI.cpp" />
     <ClCompile Include="src\Resources\Mesh.cpp" />
     <ClCompile Include="src\Manager\ResourceManager.cpp" />
     <ClCompile Include="src\GraphicsCore\RenderTargetTexture.cpp" />

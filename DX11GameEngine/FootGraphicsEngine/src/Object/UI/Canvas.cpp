@@ -19,15 +19,7 @@ namespace GraphicsEngineSpace
 	std::shared_ptr<TextUI> Canvas::CreateTextUI(const std::string& name)
 	{
 		std::string newUIName = name;
-		int ID = 1;
-
-		while(textUIMap.find(newUIName) != textUIMap.end())
-		{
-			newUIName = name + std::to_string(ID++);
-		}
-
-		std::shared_ptr<TextUI> newTextUI;
-		newTextUI.reset(new TextUI());
+		std::shared_ptr<TextUI> newTextUI = std::make_shared<TextUI>();
 
 		newTextUI->SetName(name);
 		newTextUI->SetParent(shared_from_this());
@@ -44,6 +36,28 @@ namespace GraphicsEngineSpace
 			return nullptr;
 
 		return textUI->second;
+	}
+
+	std::shared_ptr<SpriteUI> Canvas::CreateSpriteUI(const std::string& name)
+	{
+		std::string newUIName = name;
+		std::shared_ptr<SpriteUI> newSpriteUI = std::make_shared<SpriteUI>();
+
+		newSpriteUI->SetName(name);
+		newSpriteUI->SetParent(shared_from_this());
+
+		spriteUIMap.insert(std::pair{name, newSpriteUI});
+
+		return spriteUIMap.at(name);
+	}
+
+	std::shared_ptr<SpriteUI> Canvas::GetSpriteUI(const std::string& name)
+	{
+		auto spriteUI = spriteUIMap.find(name);
+		if(spriteUI == spriteUIMap.end())
+			return nullptr;
+
+		return spriteUI->second;
 	}
 
 	void Canvas::SetScaleAllCanvas(SimpleMath::Vector2 scale)
@@ -68,9 +82,16 @@ namespace GraphicsEngineSpace
 	{
 		for(auto text : textUIMap)
 		{
-			SafeReset(text.second);
+			SafeReset(text.second)
+				
+		}
+
+		for(auto sprite : spriteUIMap)
+		{
+			SafeReset(sprite.second)
 		}
 
 		textUIMap.clear();
+		spriteUIMap.clear();
 	}
 }

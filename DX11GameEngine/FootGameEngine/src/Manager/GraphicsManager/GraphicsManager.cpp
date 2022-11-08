@@ -2,6 +2,7 @@
 #include "GraphicsManager/GraphicsManager.h"
 #include "WindowManager/WindowManager.h"
 #include "InputManager/InputManager.h"
+#include "Manager/ResourceManager.h"
 #include "SceneManager/SceneManager.h"
 
 namespace GameEngineSpace
@@ -107,6 +108,36 @@ namespace GameEngineSpace
 
 		if (graphicsDLL != nullptr)
 			FreeLibrary(graphicsDLL);
+	}
+
+	void GraphicsManager::CreateUITest(HWND hWnd)
+	{
+		RECT rect;
+		GetClientRect(hWnd, &rect);
+		uint32 _width = rect.right - rect.left;
+		uint32 _height = rect.bottom - rect.top;
+
+		// 테스트용 스프라이트
+				// 해당 부분을 렌더러에 만들어 준다.
+			//testCanvas = std::make_shared<Canvas>(_width, _height);
+		testCanvas = renderer->CreateCanvas("TestCanvas", _width, _height);
+
+		auto testSprite = testCanvas->CreateSpriteUI("TestSprite");
+
+		auto resourceManager = ResourceManager::GetInstance();
+
+		uint64 id = resourceManager->LoadTexture("Smol", L"Resources/UI/Smol.png");
+
+		testSprite->SetTexture(resourceManager->GetTexture(id));
+		testSprite->SetPosition({200.f, 100.f, 0.1f});
+		testSprite->SetWidth(200.f);
+		testSprite->SetHeight(200.f);
+
+	}
+
+	void GraphicsManager::UIRender(float tick)
+	{
+		testCanvas->Render(tick);
 	}
 
 	std::shared_ptr<GraphicsManager> GraphicsManager::GetInstance()

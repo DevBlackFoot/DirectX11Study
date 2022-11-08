@@ -28,6 +28,9 @@ namespace GameEngineSpace
 			// 지만 지금은 DirLit 하나만
 		DirectionalLight* dLight;
 
+		// 테스트용 캔버스
+		std::shared_ptr<Canvas> testCanvas;
+		
 	public:
 		GraphicsManager() = default;
 		~GraphicsManager() = default;
@@ -50,6 +53,9 @@ namespace GameEngineSpace
 
 		// 빛도 던져줍시다..
 		DirectionalLight* GetDirectionalLight() { return dLight; }
+
+		void CreateUITest(HWND hWnd);
+		void UIRender(float tick);
 
 	public:
 		static std::shared_ptr<GraphicsManager> GetInstance();

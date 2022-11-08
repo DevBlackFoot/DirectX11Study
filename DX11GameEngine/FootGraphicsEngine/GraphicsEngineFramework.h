@@ -24,3 +24,10 @@
 
 // 그래픽 렌더링 데이터
 #include "inc/Utils/GraphicsRenderingData.h"
+
+// 각종 UI
+#include "Object/UI/UIBase.h"
+#include "Object/UI/Canvas.h"
+#include "Object/UI/SpriteUI.h"
+
+#include "inc/Manager/ResourceManager.h"

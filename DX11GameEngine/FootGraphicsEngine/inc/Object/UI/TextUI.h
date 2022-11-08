@@ -17,11 +17,9 @@ namespace GraphicsEngineSpace
 		SimpleMath::Vector4 color;
 		float fontSize;
 
-
 	public:
 		TextUI();
 		~TextUI() override;
-
 		void SetText(const std::string& text);
 		void SetText(const std::wstring& text);
 		void SetColor(const SimpleMath::Vector4& color);

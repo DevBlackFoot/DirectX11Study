@@ -23,6 +23,9 @@ namespace GameEngineSpace
 
 		// 모든 매니저의 Init이 끝난뒤.. 윈도우를 띄워줍니다.
 		WindowManager::GetInstance()->StartWindow();
+
+		// 텍스쳐를 제대로 불러오려면, 윈도우가 켜지고 불러와야합니다 (WIC 텍스쳐의 특징)
+		GraphicsManager::GetInstance()->CreateUITest(WindowManager::GetInstance()->GetHWND());
 	}
 
 	INT GameEngine::Tick()

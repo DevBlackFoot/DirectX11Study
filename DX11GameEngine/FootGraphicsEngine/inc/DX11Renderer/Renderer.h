@@ -12,7 +12,6 @@ namespace GraphicsEngineSpace
 	class DX11GraphicsCore;
 	class RenderTargetDepth;
 	class RenderTargetTexture;
-	class TextUI;
 
 	/**
 	 * \brief IRenderer를 상속받아 실제로 구현한 클래스.
@@ -43,10 +42,11 @@ namespace GraphicsEngineSpace
 			// CubeMap을 그리기 위한 Viewport를 따로 설정해줘야하기 때문에..
 		D3D11_VIEWPORT screenViewport;
 
-		TextUI* textTest;
+		// BlendState 세팅
+		ID3D11BlendState* blendState;
 
 		// Sprite
-		SpriteBatch* spriteBatch;
+		std::shared_ptr<SpriteBatch> spriteBatch;
 
 		float deltaTime;	
 
@@ -85,11 +85,14 @@ namespace GraphicsEngineSpace
 		virtual void InitObject() override;
 		virtual void ClearRenderVector() override;
 
+		virtual void EndRender() override;
+		// 캔버스 생성
+		virtual std::shared_ptr<Canvas> CreateCanvas(const std::string& name, float width, float height) override;
+
 	private:
 		void BeginRender();
 		void Render();
 		void DebugRender();
-		void EndRender();
 
 	};
 }

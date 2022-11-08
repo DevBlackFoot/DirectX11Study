@@ -37,10 +37,10 @@ namespace ClientSpace
 		axis->AddComponent<PosColorRenderer>()->Init("Axis", 2);
 
 		std::shared_ptr<GameObject> normalBox = CreateEmpty();
-		normalBox->AddComponent<LegacyRenderer>()->Init("Resources/Model/box.ASE", 3, 2,L"Resources/Texture/bricks.dds", 3, L"Resources/Texture/bricks_nmap.dds");
+		normalBox->AddComponent<LegacyRenderer>()->Init("Resources/Model/box.ASE", 3, 3,L"Resources/Texture/bricks.dds", 4, L"Resources/Texture/bricks_nmap.dds");
 
 		std::shared_ptr<GameObject> genji = CreateEmpty();
-		genji->AddComponent<LegacyRenderer>()->Init("Resources/Model/genji_max.ASE", 4, 5,L"Resources/Texture/000000002405.dds", 6, L"Resources/Texture/000000002406_b.dds");
+		genji->AddComponent<LegacyRenderer>()->Init("Resources/Model/genji_max.ASE", 4, 6,L"Resources/Texture/000000002405.dds", 7, L"Resources/Texture/000000002406_b.dds");
 		genji->GetComponent<Transform>()->SetPosition(Vector3{5.f, 0.f, 0.f});
 	}
 }

@@ -36,7 +36,7 @@ namespace GameEngineSpace
 
 		auto skyBoxBuilder = BuilderManger::GetInstance()->GetBuilder("SkyBoxBuilder");
 
-		skyBoxBuilder->AddTexture(skyBox, 0, "skyBoxTex", L"Resources/Texture/snowcube1024.dds", RenderingData::TextureMapType::CUBE);
+		skyBoxBuilder->AddTexture(skyBox, 1, "skyBoxTex", L"Resources/Texture/snowcube1024.dds", RenderingData::TextureMapType::CUBE);
 
 		GraphicsManager::GetInstance()->GetRenderer()->AddRenderObj(skyBox);
 	}

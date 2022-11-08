@@ -27,7 +27,7 @@ namespace GraphicsEngineSpace
 
 	private:
 		// 스크린에서의 위치
-		SimpleMath::Vector2 screenPosition;
+		SimpleMath::Vector3 screenPosition;
 
 	protected:
 		// 공통 생성자
@@ -39,7 +39,7 @@ namespace GraphicsEngineSpace
 			, position(SimpleMath::Vector3::Zero)
 			, rotation(SimpleMath::Vector3::Zero)
 			, scale(SimpleMath::Vector2{ 1.0f, 1.0f })
-			, screenPosition(SimpleMath::Vector2::Zero)
+			, screenPosition(SimpleMath::Vector3::Zero)
 		{}
 
 	public:
@@ -105,9 +105,9 @@ namespace GraphicsEngineSpace
 			return result;
 		}
 
-		SimpleMath::Vector2 GetScreenPosition()
+		SimpleMath::Vector3 GetScreenPosition()
 		{
-			auto screenPos = SimpleMath::Vector2::Zero;
+			auto screenPos = SimpleMath::Vector3::Zero;
 			auto screenScale = GetScreenScale();
 
 			if(parent.lock() != nullptr)
@@ -126,7 +126,7 @@ namespace GraphicsEngineSpace
 			screenPos.x -= width / 2 * screenScale.x;
 			screenPos.y -= height / 2 * screenScale.y;
 
-			return static_cast<SimpleMath::Vector2>(position * screenScale) + screenPos;
+			return static_cast<SimpleMath::Vector3>(position * screenScale) + screenPos;
 		}
 
 	private:

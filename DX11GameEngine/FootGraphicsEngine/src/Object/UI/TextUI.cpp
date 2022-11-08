@@ -1,7 +1,7 @@
 #include "GraphicsPch.h"
 
 #include "Object/UI/TextUI.h"
-#include "Manager/FontManager.h"
+#include "Manager/UIUtilsManager.h"
 
 namespace GraphicsEngineSpace
 {
@@ -69,11 +69,11 @@ namespace GraphicsEngineSpace
 			return;
 
 		// 그림 그리기.
-		std::shared_ptr<SpriteBatch> batch = FontManager::GetInstance()->GetSpriteBatch();
-		ID3D11DepthStencilState* depthState = FontManager::GetInstance()->GetDepthState();
+		std::shared_ptr<SpriteBatch> batch = UIUtilsManager::GetInstance()->GetSpriteBatch();
+		ID3D11DepthStencilState* depthState = UIUtilsManager::GetInstance()->GetDepthState();
 
 		batch->Begin(DirectX::SpriteSortMode_Deferred, nullptr, nullptr, depthState);
-		FontManager::GetInstance()->GetFont(font)->DrawString(batch.get(), text.c_str(), GetScreenPosition(), color, 0.0f
+		UIUtilsManager::GetInstance()->GetFont(font)->DrawString(batch.get(), text.c_str(), GetScreenPosition(), color, 0.0f
 		, DirectX::g_XMZero, SimpleMath::Vector2{ fontSize / 32.0f, fontSize / 32.0f } * GetScreenScale());
 		batch->End();
 

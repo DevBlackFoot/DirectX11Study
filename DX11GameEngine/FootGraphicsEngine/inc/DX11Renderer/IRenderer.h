@@ -9,6 +9,7 @@
 namespace GraphicsEngineSpace
 {
 	class IDXObject;
+	class Canvas;
 
 	/**
 	* \brief Renderer의 기능만 정리해둔 인터페이스 클래스
@@ -36,7 +37,11 @@ namespace GraphicsEngineSpace
 		virtual void OnResize() abstract;
 
 		// 그리기 함수
+			// Begin, Render, DebugRender 까지만 들어가 있는 렌더 함수
 		virtual void RenderAll() abstract;
+		// 그리기 종료함수
+			// present로 최종 렌더를 마치는 함수
+		virtual void EndRender() abstract;
 
 		// 창 사이즈와 관련된 함수 목록 => 외부에서 사용 가능해야하기 때문에 인터페이스에 추가
 		virtual bool IsVaildDevice() abstract;
@@ -51,6 +56,9 @@ namespace GraphicsEngineSpace
 		
 		// 씬이 바뀔 때 렌더 obj를 지워주는 함수
 		virtual void ClearRenderVector() abstract;
+
+		// UI 관련 생성함수
+		virtual std::shared_ptr<Canvas> CreateCanvas(const std::string& name, float width, float height) abstract;
 	};
 
 }

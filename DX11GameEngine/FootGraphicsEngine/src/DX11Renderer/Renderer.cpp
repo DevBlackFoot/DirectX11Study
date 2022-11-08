@@ -16,9 +16,12 @@
 #include "Manager/ShaderManager.h"
 #include "Manager/BufferManager.h"
 #include "Manager/SamplerManager.h"
-#include "Manager/FontManager.h"
+#include "Manager/UIUtilsManager.h"
+#include "Manager/ResourceManager.h"
 
+#include "Object/UI/Canvas.h"
 #include "Object/UI/TextUI.h"
+#include "Object/UI/SpriteUI.h"
 
 namespace GraphicsEngineSpace
 {
@@ -33,7 +36,7 @@ namespace GraphicsEngineSpace
 		, albedoRenderTarget(nullptr)
 		, worldPosRenderTarget(nullptr)
 		, screenViewport()
-		, textTest(nullptr)
+		, blendState(nullptr)
 		, spriteBatch(nullptr)
 		, deltaTime(0.0f)
 		, minimized(false)
@@ -83,9 +86,26 @@ namespace GraphicsEngineSpace
 		// 빌더 매니저 생성 및 Init => 디바이스를 받기 때문에 렌더러에서 Init을 해주어야한다.
 		BuilderManger::GetInstance()->InitBuilderAll(graphicsCore->GetDevice(), graphicsCore->GetImmediateDC());
 
+		// BlendState 세팅
+		D3D11_BLEND_DESC blendDesc = {};
+		ZeroMemory(&blendDesc, sizeof(D3D11_BLEND_DESC));
+
+		blendDesc.RenderTarget[0].BlendEnable = true;
+		blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_RED | D3D11_COLOR_WRITE_ENABLE_GREEN | D3D11_COLOR_WRITE_ENABLE_BLUE;
+		blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+		blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;
+		blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+
+		HRESULT hr = graphicsCore->GetDevice()->CreateBlendState(&blendDesc, &blendState);
+		if(FAILED(hr))
+			return false;
+
 		// 스프라이트 생성
-		spriteBatch = new DirectX::SpriteBatch(deviceContext);
-		FontManager::GetInstance()->Init(device, spriteBatch, mainRenderTarget->GetDepthStencilState());
+		spriteBatch = std::make_shared<DirectX::SpriteBatch>(deviceContext);
+		UIUtilsManager::GetInstance()->Init(device, spriteBatch, mainRenderTarget->GetDepthStencilState(), blendState);
 
 		// 여기까지 하면 성공
 		return true;
@@ -104,7 +124,7 @@ namespace GraphicsEngineSpace
 		ShaderManager::GetInstance()->Finalize();
 		BufferManager::GetInstance()->Finalize();
 		SamplerManager::GetInstance()->Release();
-		FontManager::GetInstance()->Finalize();
+		UIUtilsManager::GetInstance()->Finalize();
 
 		// 각종 COM 포인터를 Release 한다.
 		mainRenderTarget->Finalize();
@@ -119,7 +139,6 @@ namespace GraphicsEngineSpace
 		SafeDelete(normalRenderTarget);
 		SafeDelete(albedoRenderTarget);
 		SafeDelete(worldPosRenderTarget);
-		SafeDelete(textTest);
 	}
 
 	void Renderer::OnResize()
@@ -164,7 +183,6 @@ namespace GraphicsEngineSpace
 		BeginRender();
 		Render();
 		DebugRender();
-		EndRender();
 	}
 
 	float Renderer::GetAspectRatio() const
@@ -208,6 +226,18 @@ namespace GraphicsEngineSpace
 			renderObj.reset();
 
 		renderVector.clear();
+	}
+
+	std::shared_ptr<Canvas> Renderer::CreateCanvas(const std::string& name, float width, float height)
+	{
+		std::shared_ptr<Canvas> newCanvas = std::make_shared<Canvas>(width, height);
+
+		if(newCanvas == nullptr)
+			return nullptr;
+
+		newCanvas->SetName(name);
+
+		return newCanvas;
 	}
 
 	void Renderer::BeginRender()

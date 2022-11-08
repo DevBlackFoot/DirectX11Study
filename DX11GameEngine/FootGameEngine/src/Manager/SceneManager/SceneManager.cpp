@@ -106,6 +106,10 @@ namespace GameEngineSpace
 				//UIManager::GetInstance()->GetCanvas("DebugCanvas")->SetEnable(isDebugString);
 			}
 
+			// 모든 렌더가 끝나고 UI를 그려줍니다
+			GraphicsManager::GetInstance()->UIRender(deltaTime);
+			GraphicsManager::GetInstance()->GetRenderer()->EndRender();
+
 			// 그리고 OnEnable..
 			currentScene->OnEnable();
 		}
